@@ -1,0 +1,6 @@
+# Uso -> docker build -t python3_fastapi1 -f dockerfile
+
+FROM python:3.9-slim
+COPY . /home
+WORKDIR /home
+RUN pip install --no-cache-dir -r requirements.txt

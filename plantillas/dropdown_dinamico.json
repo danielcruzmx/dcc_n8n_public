@@ -1,0 +1,400 @@
+{
+  "name": "dropdown_dinamico",
+  "nodes": [
+    {
+      "parameters": {
+        "formTitle": "NFL AFC",
+        "formDescription": "Equipos de la conferencia americana de la NFL",
+        "formFields": {
+          "values": [
+            {
+              "fieldLabel": "Division",
+              "fieldType": "dropdown",
+              "fieldOptions": {
+                "values": [
+                  {
+                    "option": "Este"
+                  },
+                  {
+                    "option": "Norte"
+                  },
+                  {
+                    "option": "Sur"
+                  },
+                  {
+                    "option": "Oeste"
+                  }
+                ]
+              }
+            }
+          ]
+        },
+        "options": {}
+      },
+      "type": "n8n-nodes-base.formTrigger",
+      "typeVersion": 2.2,
+      "position": [
+        -640,
+        16
+      ],
+      "id": "69637557-3951-4534-88b4-81be71bf0461",
+      "name": "On form submission",
+      "webhookId": "93fbd932-00c3-43b4-92f8-ade54bf177cc"
+    },
+    {
+      "parameters": {
+        "assignments": {
+          "assignments": [
+            {
+              "id": "f1aa1753-e726-433b-9a6a-0d8e884dbab0",
+              "name": "values",
+              "value": "[{\"option\": \"Patriots\"}, {\"option\": \"Bills\"}, {\"option\":\"Dolphins\"}, {\"option\":\"Jets\"}]",
+              "type": "string"
+            }
+          ]
+        },
+        "options": {}
+      },
+      "type": "n8n-nodes-base.set",
+      "typeVersion": 3.4,
+      "position": [
+        -176,
+        -176
+      ],
+      "id": "7d3f5eb2-53df-45cf-93d3-e8c33aaed7e1",
+      "name": "Edit Fields"
+    },
+    {
+      "parameters": {
+        "rules": {
+          "values": [
+            {
+              "conditions": {
+                "options": {
+                  "caseSensitive": true,
+                  "leftValue": "",
+                  "typeValidation": "strict",
+                  "version": 2
+                },
+                "conditions": [
+                  {
+                    "leftValue": "={{ $json.Division }}",
+                    "rightValue": "Este",
+                    "operator": {
+                      "type": "string",
+                      "operation": "equals"
+                    },
+                    "id": "c592e325-3958-4760-9818-f03e7da51c39"
+                  }
+                ],
+                "combinator": "and"
+              },
+              "renameOutput": true,
+              "outputKey": "Este"
+            },
+            {
+              "conditions": {
+                "options": {
+                  "caseSensitive": true,
+                  "leftValue": "",
+                  "typeValidation": "strict",
+                  "version": 2
+                },
+                "conditions": [
+                  {
+                    "id": "6535348e-2790-4af5-9f5c-248f93a8a574",
+                    "leftValue": "={{ $json.Division }}",
+                    "rightValue": "Oeste",
+                    "operator": {
+                      "type": "string",
+                      "operation": "equals",
+                      "name": "filter.operator.equals"
+                    }
+                  }
+                ],
+                "combinator": "and"
+              },
+              "renameOutput": true,
+              "outputKey": "Oeste"
+            },
+            {
+              "conditions": {
+                "options": {
+                  "caseSensitive": true,
+                  "leftValue": "",
+                  "typeValidation": "strict",
+                  "version": 2
+                },
+                "conditions": [
+                  {
+                    "id": "644e2bdd-928d-47e7-8cb6-d655cc4d922d",
+                    "leftValue": "={{ $json.Division }}",
+                    "rightValue": "Norte",
+                    "operator": {
+                      "type": "string",
+                      "operation": "equals",
+                      "name": "filter.operator.equals"
+                    }
+                  }
+                ],
+                "combinator": "and"
+              },
+              "renameOutput": true,
+              "outputKey": "Norte"
+            },
+            {
+              "conditions": {
+                "options": {
+                  "caseSensitive": true,
+                  "leftValue": "",
+                  "typeValidation": "strict",
+                  "version": 2
+                },
+                "conditions": [
+                  {
+                    "id": "919ee0e3-4f5f-40c7-9aa4-10b0214e82de",
+                    "leftValue": "={{ $json.Division }}",
+                    "rightValue": "Sur",
+                    "operator": {
+                      "type": "string",
+                      "operation": "equals",
+                      "name": "filter.operator.equals"
+                    }
+                  }
+                ],
+                "combinator": "and"
+              },
+              "renameOutput": true,
+              "outputKey": "Sur"
+            }
+          ]
+        },
+        "options": {}
+      },
+      "type": "n8n-nodes-base.switch",
+      "typeVersion": 3.2,
+      "position": [
+        -432,
+        -16
+      ],
+      "id": "7604fbf8-32f2-4515-8920-8f816e2089b7",
+      "name": "Switch"
+    },
+    {
+      "parameters": {
+        "assignments": {
+          "assignments": [
+            {
+              "id": "61165742-a75d-4843-87bd-172712588129",
+              "name": "values",
+              "value": "[{\"option\": \"Broncos\"}, {\"option\": \"Chargers\"}, {\"option\":\"Chiefs\"}, {\"option\":\"Raiders\"}]",
+              "type": "string"
+            }
+          ]
+        },
+        "options": {}
+      },
+      "type": "n8n-nodes-base.set",
+      "typeVersion": 3.4,
+      "position": [
+        -176,
+        -48
+      ],
+      "id": "e7b8632b-6e93-497f-ad82-d51945153440",
+      "name": "Edit Fields1"
+    },
+    {
+      "parameters": {
+        "assignments": {
+          "assignments": [
+            {
+              "id": "3e26002a-ee12-49b0-a166-82a0812bffab",
+              "name": "values",
+              "value": "[{\"option\": \"Steelers\"}, {\"option\": \"Bengals\"}, {\"option\":\"Browns\"}, {\"option\":\"Ravens\"}]",
+              "type": "string"
+            }
+          ]
+        },
+        "options": {}
+      },
+      "type": "n8n-nodes-base.set",
+      "typeVersion": 3.4,
+      "position": [
+        -176,
+        80
+      ],
+      "id": "6bb75f77-d539-4cef-a222-54bb5df4ee98",
+      "name": "Edit Fields2"
+    },
+    {
+      "parameters": {
+        "assignments": {
+          "assignments": [
+            {
+              "id": "4aeaafcc-01a7-4ce7-97cb-46f4576a1553",
+              "name": "values",
+              "value": "[{\"option\": \"Colts\"}, {\"option\": \"Jaguars\"}, {\"option\":\"Texans\"}, {\"option\":\"Titans\"}]",
+              "type": "string"
+            }
+          ]
+        },
+        "options": {}
+      },
+      "type": "n8n-nodes-base.set",
+      "typeVersion": 3.4,
+      "position": [
+        -176,
+        208
+      ],
+      "id": "7106fd8b-e3b6-47e1-be4e-99cbdb3a4b63",
+      "name": "Edit Fields3"
+    },
+    {
+      "parameters": {
+        "defineForm": "json",
+        "jsonOutput": "=[\n   {\n    \"fieldLabel\": \"Equipo\",\n    \"fieldType\": \"dropdown\",\n    \"fieldOptions\": {\n      \"values\": {{ $json.values[0] }}\n    },\n    \"requiredField\": true\n  }\n]  ",
+        "options": {}
+      },
+      "type": "n8n-nodes-base.form",
+      "typeVersion": 1,
+      "position": [
+        288,
+        16
+      ],
+      "id": "ed8ecfb2-365c-4baa-998b-b20205d76099",
+      "name": "Form",
+      "webhookId": "e6c9eddf-266a-42e5-9b67-cd6087db3323"
+    },
+    {
+      "parameters": {
+        "fieldsToAggregate": {
+          "fieldToAggregate": [
+            {
+              "fieldToAggregate": "values"
+            }
+          ]
+        },
+        "options": {}
+      },
+      "type": "n8n-nodes-base.aggregate",
+      "typeVersion": 1,
+      "position": [
+        112,
+        16
+      ],
+      "id": "6884a718-aecc-4431-b4fd-64dc2ef11091",
+      "name": "Aggregate"
+    }
+  ],
+  "pinData": {},
+  "connections": {
+    "On form submission": {
+      "main": [
+        [
+          {
+            "node": "Switch",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "Edit Fields": {
+      "main": [
+        [
+          {
+            "node": "Aggregate",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "Switch": {
+      "main": [
+        [
+          {
+            "node": "Edit Fields",
+            "type": "main",
+            "index": 0
+          }
+        ],
+        [
+          {
+            "node": "Edit Fields1",
+            "type": "main",
+            "index": 0
+          }
+        ],
+        [
+          {
+            "node": "Edit Fields2",
+            "type": "main",
+            "index": 0
+          }
+        ],
+        [
+          {
+            "node": "Edit Fields3",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "Edit Fields1": {
+      "main": [
+        [
+          {
+            "node": "Aggregate",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "Edit Fields2": {
+      "main": [
+        [
+          {
+            "node": "Aggregate",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "Edit Fields3": {
+      "main": [
+        [
+          {
+            "node": "Aggregate",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "Aggregate": {
+      "main": [
+        [
+          {
+            "node": "Form",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    }
+  },
+  "active": false,
+  "settings": {
+    "executionOrder": "v1"
+  },
+  "versionId": "154de568-1c37-41d9-8953-dce67d076a39",
+  "meta": {
+    "instanceId": "67b255571d3e77948fbbda85494c7a22923b13cf8843d38014de44d273cbcaf4"
+  },
+  "id": "6E44hlXt7Ujkn0ng",
+  "tags": []
+}

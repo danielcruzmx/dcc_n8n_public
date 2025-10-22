@@ -1,0 +1,113 @@
+services:
+
+    db:
+        image: postgres
+        volumes:
+            - postgres-vol:/var/lib/postgresql/data
+        environment:
+            - POSTGRES_PASSWORD=P0stgr3s
+        ports:
+            - "0.0.0.0:5432:5432"
+        tty: true
+        networks:
+          vpn8n:
+            ipv4_address: 10.13.0.2
+
+    admin_db:
+        image: dpage/pgadmin4
+        volumes:
+            - ./database:/respaldo 
+        environment:
+            - PGADMIN_DEFAULT_EMAIL=correo.test@gmail.com
+            - PGADMIN_DEFAULT_PASSWORD=P0stgr3s
+        ports:
+            - "0.0.0.0:8015:80"
+        depends_on:
+            - db    
+        tty: true
+        networks:
+          vpn8n:
+            ipv4_address: 10.13.0.3
+
+    cache:
+        image: redis
+        ports:
+            - "0.0.0.0:6379:6379"
+        tty: true
+        networks:
+          vpn8n:
+            ipv4_address: 10.13.0.4
+
+    api:
+        image: python3_fastapi1:latest
+        volumes:
+            - ./fastapi:/home
+        environment:
+            - HOSTDB=10.13.0.2
+            - USERDB=postgres
+            - PASSDB=P0stgr3s
+            - PORTDB=5432
+            - DATABASE=postgres
+            - CACHE=10.13.0.4
+        ports:
+            - "0.0.0.0:4557:4557"
+        depends_on:
+            - db
+        entrypoint: uvicorn main:app --host 0.0.0.0 --port 4557 --reload --workers 1    
+        tty: true
+        networks:
+          vpn8n:
+            ipv4_address: 10.13.0.5
+
+    qdrant:
+        image: qdrant/qdrant
+        volumes:
+            - ./qdrant:/home/qdrant/storage
+        ports:
+            - "0.0.0.0:6333:6333"
+        restart: unless-stopped
+        tty: true
+        networks:
+          vpn8n:
+            ipv4_address: 10.13.0.6
+
+    web:
+        image: python3_flask2:latest
+        volumes:
+            - ./flask:/home
+        environment:
+            - HOSTAPI=http://10.13.0.5:4557
+            - HOSTCACHE=10.13.0.4
+        ports:
+            - "0.0.0.0:5001:5001"
+        working_dir: /home  
+        tty: true
+        networks:
+          vpn8n:
+            ipv4_address: 10.13.0.7
+
+    n8n:
+        image: n8nio/n8n
+        volumes:
+            - ./n8n_data:/home/node/.n8n
+        environment:
+            - N8N_BASIC_AUTH_ACTIVE=true
+            - N8N_BASIC_AUTH_USER=usern8n
+            - N8N_BASIC_AUTH_PASSWORD=c0ntr4s3n4
+        ports:
+            - "0.0.0.0:5678:5678"
+        networks: 
+          vpn8n:
+            ipv4_address: 10.13.0.8
+        restart: unless-stopped
+
+volumes:
+  postgres-vol:
+
+networks:
+  vpn8n:
+    driver: bridge
+    ipam:
+      config:
+        - subnet: 10.13.0.0/16
+          gateway: 10.13.0.1

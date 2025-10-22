@@ -1,0 +1,279 @@
+{
+  "name": "GeneraCalendarioNFL",
+  "nodes": [
+    {
+      "parameters": {},
+      "type": "n8n-nodes-base.manualTrigger",
+      "typeVersion": 1,
+      "position": [
+        -1472,
+        -784
+      ],
+      "id": "07b7407b-1c78-4286-80a6-86b95bcdacc9",
+      "name": "When clicking ‘Execute workflow’"
+    },
+    {
+      "parameters": {
+        "documentId": {
+          "__rl": true,
+          "value": "1vUe1KyqBg2DKjQ6otFyLYX_7TUVd9Ugh7XaGiAKAGUM",
+          "mode": "list",
+          "cachedResultName": "equiposNFL",
+          "cachedResultUrl": "https://docs.google.com/spreadsheets/d/1vUe1KyqBg2DKjQ6otFyLYX_7TUVd9Ugh7XaGiAKAGUM/edit?usp=drivesdk"
+        },
+        "sheetName": {
+          "__rl": true,
+          "value": "gid=0",
+          "mode": "list",
+          "cachedResultName": "Hoja 1",
+          "cachedResultUrl": "https://docs.google.com/spreadsheets/d/1vUe1KyqBg2DKjQ6otFyLYX_7TUVd9Ugh7XaGiAKAGUM/edit#gid=0"
+        },
+        "options": {}
+      },
+      "type": "n8n-nodes-base.googleSheets",
+      "typeVersion": 4.6,
+      "position": [
+        -1280,
+        -784
+      ],
+      "id": "b75ae33a-3080-4f18-bc12-2416b787e2bd",
+      "name": "Equipos ID calendar",
+      "credentials": {
+        "googleSheetsOAuth2Api": {
+          "id": "ZLIDpEagr6el58s5",
+          "name": "Google Sheets account"
+        }
+      }
+    },
+    {
+      "parameters": {
+        "compare": "selectedFields",
+        "fieldsToCompare": "summary",
+        "options": {}
+      },
+      "type": "n8n-nodes-base.removeDuplicates",
+      "typeVersion": 2,
+      "position": [
+        -1280,
+        -560
+      ],
+      "id": "57494a46-e6d2-4675-ad2d-e0adb9fceb03",
+      "name": "Remove Duplicates"
+    },
+    {
+      "parameters": {
+        "operation": "getAll",
+        "calendar": {
+          "__rl": true,
+          "value": "={{ $('Set ID Calendario e Inicio y Fin temporada').item.json.ID_equipo }}",
+          "mode": "id"
+        },
+        "returnAll": true,
+        "timeMin": "={{ $json.inicio_temporada }}",
+        "timeMax": "={{ $json.fin_temporada }}",
+        "options": {}
+      },
+      "type": "n8n-nodes-base.googleCalendar",
+      "typeVersion": 1.3,
+      "position": [
+        -1472,
+        -560
+      ],
+      "id": "0d3ecae3-3ef0-4ed6-adbd-076f9a22a600",
+      "name": "Calendario de juegos",
+      "executeOnce": false,
+      "credentials": {
+        "googleCalendarOAuth2Api": {
+          "id": "VRBY8zV6QIUFDSx3",
+          "name": "Google Calendar account"
+        }
+      }
+    },
+    {
+      "parameters": {
+        "assignments": {
+          "assignments": [
+            {
+              "id": "414e9ea8-50ef-482f-aa28-35ae103d0a25",
+              "name": "id",
+              "value": "={{ $json.id }}",
+              "type": "string"
+            },
+            {
+              "id": "4637cb24-18ca-495b-948b-26ac7cad874c",
+              "name": "summary",
+              "value": "={{ $json.summary }}",
+              "type": "string"
+            },
+            {
+              "id": "08a7690c-8ea7-4fa5-8927-a2ba80022427",
+              "name": "start",
+              "value": "={{ $json.start.dateTime  || $json.start.date }}",
+              "type": "string"
+            },
+            {
+              "id": "67353d1b-ae7e-462e-8872-0c8ba6e64f6e",
+              "name": "end",
+              "value": "={{ $json.end.dateTime || $json.start.date }}",
+              "type": "string"
+            }
+          ]
+        },
+        "options": {}
+      },
+      "type": "n8n-nodes-base.set",
+      "typeVersion": 3.4,
+      "position": [
+        -1088,
+        -560
+      ],
+      "id": "cbebf279-0a24-4e60-9499-ccb210a38687",
+      "name": "SET ID Partidos y Fechas"
+    },
+    {
+      "parameters": {
+        "assignments": {
+          "assignments": [
+            {
+              "id": "fe78e3c3-2521-42b2-88be-68306660cef7",
+              "name": "ID_equipo",
+              "value": "={{ $json.ID }}",
+              "type": "string"
+            },
+            {
+              "id": "2af4c4ed-d5e2-4571-a6cc-ac2c9cf56e66",
+              "name": "inicio_temporada",
+              "value": "={{ DateTime.fromISO('2025-09-03').startOf('day').toISO() }}",
+              "type": "string"
+            },
+            {
+              "id": "c12fadf1-1a6b-491a-9c40-37cce53e55ac",
+              "name": "fin_temporada",
+              "value": "={{ DateTime.fromISO('2026-01-06').endOf('day').toISO() }}",
+              "type": "string"
+            }
+          ]
+        },
+        "options": {}
+      },
+      "type": "n8n-nodes-base.set",
+      "typeVersion": 3.4,
+      "position": [
+        -1088,
+        -784
+      ],
+      "id": "e4de20a1-23b6-492d-99a9-5d865761dbf6",
+      "name": "Set ID Calendario e Inicio y Fin temporada"
+    },
+    {
+      "parameters": {
+        "calendar": {
+          "__rl": true,
+          "value": "318c28c7a35ff76abe2f6d024693a9b9603a5fcc653252a5653ad2c8a9fdef56@group.calendar.google.com",
+          "mode": "list",
+          "cachedResultName": "CalendarioNFL"
+        },
+        "start": "={{ $json.start }}",
+        "end": "={{ $json.end }}",
+        "additionalFields": {
+          "id": "=mi{{ $json.id }}",
+          "summary": "={{ $json.summary }}"
+        }
+      },
+      "type": "n8n-nodes-base.googleCalendar",
+      "typeVersion": 1.3,
+      "position": [
+        -880,
+        -560
+      ],
+      "id": "22b3e3df-cb7c-4ff3-91dd-1f4e1408331d",
+      "name": "Create an event",
+      "credentials": {
+        "googleCalendarOAuth2Api": {
+          "id": "VRBY8zV6QIUFDSx3",
+          "name": "Google Calendar account"
+        }
+      }
+    }
+  ],
+  "pinData": {},
+  "connections": {
+    "When clicking ‘Execute workflow’": {
+      "main": [
+        [
+          {
+            "node": "Equipos ID calendar",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "Equipos ID calendar": {
+      "main": [
+        [
+          {
+            "node": "Set ID Calendario e Inicio y Fin temporada",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "Calendario de juegos": {
+      "main": [
+        [
+          {
+            "node": "Remove Duplicates",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "Remove Duplicates": {
+      "main": [
+        [
+          {
+            "node": "SET ID Partidos y Fechas",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "Set ID Calendario e Inicio y Fin temporada": {
+      "main": [
+        [
+          {
+            "node": "Calendario de juegos",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "SET ID Partidos y Fechas": {
+      "main": [
+        [
+          {
+            "node": "Create an event",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    }
+  },
+  "active": false,
+  "settings": {
+    "executionOrder": "v1"
+  },
+  "versionId": "95aa5fa3-8de6-44d3-8abc-8a1c5ac5134c",
+  "meta": {
+    "templateCredsSetupCompleted": true,
+    "instanceId": "67b255571d3e77948fbbda85494c7a22923b13cf8843d38014de44d273cbcaf4"
+  },
+  "id": "SFqMe6fYWicAJ6DG",
+  "tags": []
+}
