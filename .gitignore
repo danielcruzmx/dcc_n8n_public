@@ -3,7 +3,6 @@
 *.pyc
 *.bak
 *.bk
-*.xlsx
 *.pdf
 *.sqlite
 *.zip

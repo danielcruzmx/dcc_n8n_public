@@ -1,0 +1,76 @@
+{
+  "name": "api_http_request",
+  "nodes": [
+    {
+      "parameters": {},
+      "type": "n8n-nodes-base.manualTrigger",
+      "typeVersion": 1,
+      "position": [
+        -496,
+        -96
+      ],
+      "id": "b13d3ef5-345e-4e10-a64d-db8124935191",
+      "name": "When clicking ‘Execute workflow’"
+    },
+    {
+      "parameters": {
+        "url": "http://10.13.0.5:4557/tablaispt",
+        "sendQuery": true,
+        "queryParameters": {
+          "parameters": [
+            {
+              "name": "skip",
+              "value": "0"
+            },
+            {
+              "name": "take",
+              "value": "10"
+            }
+          ]
+        },
+        "sendHeaders": true,
+        "headerParameters": {
+          "parameters": [
+            {
+              "name": "accept",
+              "value": "application/json"
+            }
+          ]
+        },
+        "options": {}
+      },
+      "type": "n8n-nodes-base.httpRequest",
+      "typeVersion": 4.2,
+      "position": [
+        -240,
+        -96
+      ],
+      "id": "296eeccc-c3e4-47ff-886b-c76df9f6bdf3",
+      "name": "HTTP Request"
+    }
+  ],
+  "pinData": {},
+  "connections": {
+    "When clicking ‘Execute workflow’": {
+      "main": [
+        [
+          {
+            "node": "HTTP Request",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    }
+  },
+  "active": false,
+  "settings": {
+    "executionOrder": "v1"
+  },
+  "versionId": "e03526fd-b838-40f8-b325-30c189f3ec7b",
+  "meta": {
+    "instanceId": "66037d4eb617fb26a2fd45902042e170cf5a5f2ddf737127b2240a034f738436"
+  },
+  "id": "xEzIogGXQv348IOp",
+  "tags": []
+}
