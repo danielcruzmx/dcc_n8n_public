@@ -10,10 +10,10 @@ Este repositorio usa 3 herramientas que ayudan a resolver problemas.
 
 Como herramientas adicionales estan:
 
-- **PostgreSql**	Base de datos relacional.
-- **PGAdmin**		Administrador de base de datos PostgreSql.
-- **Redis** 		Cache. 
-- **Qdrant**		Base de datos vectorial para agentes de IA.
+- **PostgreSql** |	Base de datos relacional.
+- **PGAdmin** |		Administrador de base de datos PostgreSql.
+- **Redis** | 		Cache. 
+- **Qdrant** |		Base de datos vectorial para agentes de IA.
 
 ## INSTALACION
 
