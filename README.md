@@ -10,10 +10,10 @@ Este repositorio usa 3 herramientas que ayudan a resolver problemas.
 
 Como herramientas adicionales estan:
 
-- **PostgreSql** |	Base de datos relacional.
-- **PGAdmin** |		Administrador de base de datos PostgreSql.
-- **Redis** | 		Cache. 
-- **Qdrant** |		Base de datos vectorial para agentes de IA.
+- **PostgreSql** -	Base de datos relacional.
+- **PGAdmin** -		Administrador de base de datos PostgreSql.
+- **Redis** -		Cache. 
+- **Qdrant** -		Base de datos vectorial para agentes de IA.
 
 ## INSTALACION
 
@@ -81,12 +81,12 @@ Para destruir un contenedor usa "rm" despues de pausar su ejecucion.
 
 Ver README.md en cada directorio del repositorio
 
-- **/database**			Uso del administrador de base de datos y creacion de tablas
-- **/fastapi** 			Uso de la api
-- **/flask**  			Arranque y uso del servidor Web
-- **/plantillas**		Descripcion de las plantillas n8n
-- **/qdrant**			Conceptos sobre base de datos vectoriales y agentes de IA
-- **/VPS_config**		Descripcion de la configuracion para VPS
+- **/database**	-		Uso del administrador de base de datos y creacion de tablas
+- **/fastapi** -			Uso de la api
+- **/flask** - 			Arranque y uso del servidor Web
+- **/plantillas** -		Descripcion de las plantillas n8n
+- **/qdrant** -			Conceptos sobre base de datos vectoriales y agentes de IA
+- **/VPS_config** -		Descripcion de la configuracion para VPS
 
 
 
