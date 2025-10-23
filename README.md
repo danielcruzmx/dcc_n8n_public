@@ -1,6 +1,6 @@
-# Repositorio publico de contenedores y automatizaciones N8N.
+# Repositorio publico de Python y automatizaciones N8N con contenedores.
 
-##RESUMEN
+## RESUMEN
 
 Este repositorio usa 3 herramientas que ayudan a resolver problemas.
 
@@ -15,7 +15,7 @@ Como herramientas adicionales estan:
 -Redis 			Cache. 
 -Qdrant			Base de datos vectorial para agentes de IA.
 
-##INSTALACION
+## INSTALACION
 
 Como requisito indispensble se requiere tener instalado DOCKER o PODMAN.
 
@@ -35,7 +35,7 @@ Las imagenes de FastApi y Flask basadas en la imagen python:3.9-slim se construy
 - *flask > docker build -t python3_flask2 -f dockerfile*
 - *fastapi > docker build -t python3_fastapi1 -f dockerfile*
 
-##ARRANQUE Y ADMINISTRACION DE LOS CONTENEDORES
+## ARRANQUE Y ADMINISTRACION DE LOS CONTENEDORES
 
 Recomiendo arrancar los servicios uno a uno de la siguiente manera:
 
@@ -77,7 +77,7 @@ Para destruir un contenedor usa "rm" despues de pausar su ejecucion.
 
 - *docker rm Container_ID*
 
-##CONFIGURACION Y USO DE LOS CONTENEDORES
+## CONFIGURACION Y USO DE LOS CONTENEDORES
 
 Ver README.md en cada directorio del repositorio
 
