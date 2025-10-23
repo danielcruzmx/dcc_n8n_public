@@ -1,4 +1,4 @@
-from Routers                 import calculo
+from Routers                 import catalogos
 from fastapi                 import FastAPI
 from fastapi.middleware.cors import CORSMiddleware
 from Config.basedatos        import database
@@ -34,5 +34,5 @@ async def read_items():
     return [{"elemento": "uno"}]
 
 #app.include_router(seguridad.router)
-app.include_router(calculo.router)
+app.include_router(catalogos.router)
 

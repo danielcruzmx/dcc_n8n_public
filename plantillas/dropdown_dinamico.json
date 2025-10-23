@@ -19,10 +19,10 @@
                     "option": "Norte"
                   },
                   {
-                    "option": "Sur"
+                    "option": "Oeste"
                   },
                   {
-                    "option": "Oeste"
+                    "option": "Sur"
                   }
                 ]
               }
@@ -34,10 +34,10 @@
       "type": "n8n-nodes-base.formTrigger",
       "typeVersion": 2.2,
       "position": [
-        -640,
-        16
+        -464,
+        192
       ],
-      "id": "69637557-3951-4534-88b4-81be71bf0461",
+      "id": "84ea3569-b59c-4347-9b39-4279c5a604e0",
       "name": "On form submission",
       "webhookId": "93fbd932-00c3-43b4-92f8-ade54bf177cc"
     },
@@ -48,7 +48,7 @@
             {
               "id": "f1aa1753-e726-433b-9a6a-0d8e884dbab0",
               "name": "values",
-              "value": "[{\"option\": \"Patriots\"}, {\"option\": \"Bills\"}, {\"option\":\"Dolphins\"}, {\"option\":\"Jets\"}]",
+              "value": "[ {\"option\": \"Bills\"}, {\"option\":\"Dolphins\"}, {\"option\":\"Jets\"}, {\"option\": \"Patriots\"}]",
               "type": "string"
             }
           ]
@@ -58,10 +58,10 @@
       "type": "n8n-nodes-base.set",
       "typeVersion": 3.4,
       "position": [
-        -176,
-        -176
+        0,
+        0
       ],
-      "id": "7d3f5eb2-53df-45cf-93d3-e8c33aaed7e1",
+      "id": "9e40da53-d831-4c53-a97d-9c1c91b8d2ce",
       "name": "Edit Fields"
     },
     {
@@ -174,10 +174,10 @@
       "type": "n8n-nodes-base.switch",
       "typeVersion": 3.2,
       "position": [
-        -432,
-        -16
+        -256,
+        160
       ],
-      "id": "7604fbf8-32f2-4515-8920-8f816e2089b7",
+      "id": "ed3e1d75-793a-46ca-b328-70f6bcf30ec3",
       "name": "Switch"
     },
     {
@@ -197,10 +197,10 @@
       "type": "n8n-nodes-base.set",
       "typeVersion": 3.4,
       "position": [
-        -176,
-        -48
+        0,
+        128
       ],
-      "id": "e7b8632b-6e93-497f-ad82-d51945153440",
+      "id": "b7f12b96-174b-4d96-bd0e-25e9a804c8ae",
       "name": "Edit Fields1"
     },
     {
@@ -210,7 +210,7 @@
             {
               "id": "3e26002a-ee12-49b0-a166-82a0812bffab",
               "name": "values",
-              "value": "[{\"option\": \"Steelers\"}, {\"option\": \"Bengals\"}, {\"option\":\"Browns\"}, {\"option\":\"Ravens\"}]",
+              "value": "[ {\"option\": \"Bengals\"}, {\"option\":\"Browns\"}, {\"option\":\"Ravens\"}, {\"option\": \"Steelers\"}]",
               "type": "string"
             }
           ]
@@ -220,10 +220,10 @@
       "type": "n8n-nodes-base.set",
       "typeVersion": 3.4,
       "position": [
-        -176,
-        80
+        0,
+        256
       ],
-      "id": "6bb75f77-d539-4cef-a222-54bb5df4ee98",
+      "id": "eda16437-3784-489c-b6af-61de179afc6b",
       "name": "Edit Fields2"
     },
     {
@@ -243,10 +243,10 @@
       "type": "n8n-nodes-base.set",
       "typeVersion": 3.4,
       "position": [
-        -176,
-        208
+        0,
+        384
       ],
-      "id": "7106fd8b-e3b6-47e1-be4e-99cbdb3a4b63",
+      "id": "93489a98-48ca-4abf-a2ef-b04702b5fd13",
       "name": "Edit Fields3"
     },
     {
@@ -258,10 +258,10 @@
       "type": "n8n-nodes-base.form",
       "typeVersion": 1,
       "position": [
-        288,
-        16
+        464,
+        192
       ],
-      "id": "ed8ecfb2-365c-4baa-998b-b20205d76099",
+      "id": "b8c53441-8099-4f9c-9542-82f3f6b96438",
       "name": "Form",
       "webhookId": "e6c9eddf-266a-42e5-9b67-cd6087db3323"
     },
@@ -279,10 +279,10 @@
       "type": "n8n-nodes-base.aggregate",
       "typeVersion": 1,
       "position": [
-        112,
-        16
+        288,
+        192
       ],
-      "id": "6884a718-aecc-4431-b4fd-64dc2ef11091",
+      "id": "7fd7e279-5b36-41d8-82cc-bba58eba3059",
       "name": "Aggregate"
     }
   ],
@@ -391,10 +391,10 @@
   "settings": {
     "executionOrder": "v1"
   },
-  "versionId": "154de568-1c37-41d9-8953-dce67d076a39",
+  "versionId": "6d62ee73-4707-408c-8354-1c7308dc9ba2",
   "meta": {
-    "instanceId": "67b255571d3e77948fbbda85494c7a22923b13cf8843d38014de44d273cbcaf4"
+    "instanceId": "66037d4eb617fb26a2fd45902042e170cf5a5f2ddf737127b2240a034f738436"
   },
-  "id": "6E44hlXt7Ujkn0ng",
+  "id": "Wnryowobq9aEvvqm",
   "tags": []
 }

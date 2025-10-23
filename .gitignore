@@ -6,6 +6,7 @@
 *.xlsx
 *.pdf
 *.sqlite
+*.zip
 
 
 n8n_data/

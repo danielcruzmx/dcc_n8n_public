@@ -93,7 +93,7 @@ services:
         environment:
             - N8N_BASIC_AUTH_ACTIVE=true
             - N8N_BASIC_AUTH_USER=usern8n
-            - N8N_BASIC_AUTH_PASSWORD=c0ntr4s3n4
+            - N8N_BASIC_AUTH_PASSWORD=C0ntr4s3n4
         ports:
             - "0.0.0.0:5678:5678"
         networks: 
