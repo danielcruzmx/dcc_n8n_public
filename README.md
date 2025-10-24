@@ -5,7 +5,7 @@
 En este repositorio uso 3 herramientas principales:
 
 1. **Docker** que facilita la infraestructura
-2. **Python** con sus frameworks ***FastApi*** para una rapida recuperación y actualización de datos y ***Flask*** para la ejecución de procesos
+2. **Python** con sus frameworks ***FastApi*** para una rapida recuperación y actualización de datos y ***Flask*** para la ejecución de procesos en un servidor web
 3. **N8N** para la automatización e integracion con otras herramientas como agentes de IA, correo electronico, almacenamiento en la nube y mensajeria
 
 Como herramientas adicionales:
