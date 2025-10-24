@@ -17,7 +17,7 @@ Como herramientas adicionales:
 
 ## INSTALACION
 
-Como requisito indispensble se requiere tener instalado **DOCKER** o **PODMAN**.
+Como requisito indispensble se requiere tener instalado **DOCKER** o **PODMAN** y el complemento ***DOCKER COMPOSE***.
 
 El archivo ***docker-compose.yml*** tiene la configuración para arrancar los servicios en un **EQUIPO LOCAL**, con algunos cambios puede llevarse a un VPS y trabajar en la nube con el protocolo HTTPS -ver directorio VPS_config-.
 
