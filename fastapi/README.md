@@ -1,15 +1,19 @@
-# PRUEBA DE LA API 
+# USO DE LA API 
 
-Despues de arrancar el contenedor *FastApi* puede entrar a el en la dirección *http://localhost:4557/docs*, se muestran las rutas de los servicios programados. De clic sobre la ruta para desplegar la documentacion del servicio y si desea ejecutarlo presione el botón *Try it out* y posteriormente *Execute*.
+En la dirección ***http://localhost:4557/docs*** se muestran las rutas de los servicios hasta ahora programados. 
 
-Es importante estar atento a la caja de texto *curl*, esas lineas son el llamado de la API y pueden usarse para configurar nodos *HTTP Request* de N8N.
+Clic del raton sobre una ruta despliega la documentacion del servicio, si desea ejecutarlo presione el botón ***Try it out*** y posteriormente ***Execute***.
 
-## CREACION DE NUEVOS SERVICIOS
+Es importante estar atento a la caja de texto ***curl***, esas lineas son el llamado de la API y pueden usarse para configurar nodos ***HTTP Request*** en N8N.
 
-El codigo de esta API -de momento- esta hecho para tareas de consulta de datos. Es muy facil incorporar rutas -nuevos servicios- relacionados con nuevas tablas que se creen en la base de datos.
+## NUEVOS SERVICIOS
 
-Debe seguir los pasos:
+El codigo de esta API -de momento- esta hecho para tareas de consulta de datos. 
 
-1. Definir la consulta SQL de recuperación de los datos (Catalogos/consultas.py).
-2. Definir el BaseModel (esquema) de los datos (Catalogos/esquemas.py).
-3. Importar lo anterior al programa donde estan las rutas (Routers/catalogos.py), agregue el codigo de la ruta *@router.get*, especificando correctamente los nuevos parametros.  
+Es muy facil incorporar nuevas rutas -nuevos servicios- relacionados con los datos de nuevas tablas de la base de datos.
+
+Simplemente hay que seguir los pasos:
+
+1. Defina la consulta SQL de recuperación de los datos en el archivo ***Catalogos/consultas.py***.
+2. Defina el BaseModel (esquema) de los datos en el archivo ***Catalogos/esquemas.py***
+3. En el archivo ***Routers/catalogos.py*** importe los objetos anteriores y agregue el codigo para la nueva ruta especificando correctamente los nuevos parametros.  
