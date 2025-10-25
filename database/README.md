@@ -1,20 +1,20 @@
-## INICIO DEL ADMINISTRADOR PGADMIN PARA POSTGRESQL 
+## Inicio del administrador de base de datos y creacion de tablas
 
-## CREACION DE OBJETOS (TABLAS)
+### CREACION DE OBJETOS (TABLAS)
 
 Para administrar la base de datos con PgAdmin entre a la dirección ***http://localhost:8015*** 
 
 El correo y contraseña de acceso estan definidos en el archivo ***docker-compose.yml***, en el apartado del servicio ***admin_db***.
 
-Dentro del administrador configure la conexión para PostgreSql usando el icono ***Add new Server***, el nombre de la conexiòn puede ser por ejemplo ***local***. 
+Dentro del administrador configure la conexión para PostgreSql usando el icono ***Agregar un Nuevo Servidor***, el nombre de la conexión puede ser por ejemplo ***local***. 
 
-Ubique la ceja de los parametros de conexión y especifique la ***URL del servidor***, debe ser la IP asignada al contenedor de PostgreSql ***10.13.0.2 -archivo docker.compose.yml-***.
+Ubique la ceja ***Conexión*** y especifique la ***Dirección del servidor***, debe ser la IP asignada al contenedor de PostgreSql ***10.13.0.2 -ver archivo docker.compose.yml-***.
 
 El usuario por default es ***postgres*** al igual que la base de datos, la contraseña esta definida en el archivo ***docker-compose.yml***, en el aprtado del servicio ***db***.
 
 A la izquierda del administrador siempre vera el arbol de objetos de la base de datos, clic del boton derecho del raton sobre un objeto permite administrar los elementos.
 
-Ubique el objeto ***Secuencias*** dentro de ***Esquemas*** y con la ayuda del boton derecho del raton cree la sequencia ***sq_ispt***, esta secuencia se va a requerir al momento de crear las tablas que serviran para realizar algunos ejemplos de automatización que veremos posteriormente.
+Ubique el objeto ***Secuencias*** dentro de ***Esquemas*** y con la ayuda del boton derecho del raton cree la sequencia ***sq_ispt***, esta secuencia se va a requerir al momento de crear las tablas que sirven para realizar los ejemplos de automatización de este repositorio.
 
 Para crear las tablas, ubique en la parte superior de PgAdmin el **menu Herramientas** y tome la opción ***Herramienta de consulta***, en el área de edición de las consultas copie y ejecute el contenido del script ***crear_tablas.sql***
 

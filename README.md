@@ -1,23 +1,25 @@
 ## Python y automatizaciones N8N con contenedores
 
-## RESUMEN
+### RESUMEN
 
-En este repositorio uso 3 herramientas principales:
+Uso tres herramientas principales:
 
 1. **Docker** que facilita la infraestructura
 2. **Python** con sus frameworks ***FastApi*** para una rapida recuperación y actualización de datos y ***Flask*** para la ejecución de procesos en un servidor web
 3. **N8N** para la automatización e integracion con otras herramientas como agentes de IA, correo electronico, almacenamiento en la nube y mensajeria
 
-Como herramientas adicionales:
+Y como herramientas adicionales:
 
 - **PostgreSql** -	Base de datos relacional
 - **PGAdmin** -		Administrador de base de datos para PostgreSql
 - **Redis** -		Cache
 - **Qdrant** -		Base de datos vectorial para agentes de IA
 
-## INSTALACION
+### INSTALACION
 
 Como requisito indispensble se requiere tener instalado **DOCKER** o **PODMAN** y el complemento ***DOCKER COMPOSE***.
+
+#### Archivo docker-compose.yml
 
 El archivo ***docker-compose.yml*** tiene la configuración para arrancar los servicios en un **EQUIPO LOCAL**, con algunos cambios puede llevarse a un ***VPS*** para trabajar en la nube con el protocolo ***HTTPS*** -ver directorio VPS_config-.
 
@@ -41,7 +43,7 @@ docker build -t python3_flask2 -f dockerfile
 docker build -t python3_fastapi1 -f dockerfile
 ```
 
-## ARRANQUE Y ADMINISTRACION DE LOS CONTENEDORES
+### ARRANQUE Y ADMINISTRACION DE LOS CONTENEDORES
 
 Recomiendo arrancar los servicios uno a uno en el siguiente orden:
 
@@ -105,7 +107,7 @@ Para destruir un contenedor use:
 docker rm Container_ID
 ```
 
-## USO DE LOS SERVICIOS
+### USO DE LOS SERVICIOS
 
 Ver README.md en cada directorio del repositorio
 
@@ -116,7 +118,4 @@ Ver README.md en cada directorio del repositorio
 - ***/qdrant*** 	-		Conceptos sobre base de datos vectoriales y agentes de IA
 - ***/n8n_data*** 	-		Inicio de n8n y licencia
 - ***/VPS_config*** -		Descripción de la configuracion para VPS
-
-
-
 
