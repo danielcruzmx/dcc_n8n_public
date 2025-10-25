@@ -1,4 +1,4 @@
-# Python y automatizaciones N8N con contenedores
+## Python y automatizaciones N8N con contenedores
 
 ## RESUMEN
 
@@ -24,7 +24,6 @@ El archivo ***docker-compose.yml*** tiene la configuración para arrancar los se
 Las imagenes base se descargan asi:
 
 ```
-
 docker pull postgres:latest
 docker pull dpage/pgadmin4:latest 
 docker pull redis:latest
