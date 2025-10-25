@@ -86,7 +86,7 @@ Para ver los parámetros de configuracion del contenedor use:
 
 ```
 docker inspect Container_ID
-``
+```
 
 Un contenedor en estado ***UP*** puede ser pausado con:
 
