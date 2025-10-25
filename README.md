@@ -31,15 +31,16 @@ docker pull redis:latest
 docker pull qdrant/qdrant:latest
 docker pull n8nio/n8n:latest
 docker pull python:3.9-slim
-
 ```
 
 Las imagenes para los servidores ***FastApi*** y ***Flask*** se construyen con la ayuda de los archivos ***dockerfile*** y ***requirements.txt*** ubicados en cada directorio.
 
 Es necesario entrar al directorio correspondiente y ejecutar en cada directorio la instrucción:
 
-- ***docker build -t python3_flask2 -f dockerfile***
-- ***docker build -t python3_fastapi1 -f dockerfile***
+```
+docker build -t python3_flask2 -f dockerfile
+docker build -t python3_fastapi1 -f dockerfile
+```
 
 ## ARRANQUE Y ADMINISTRACION DE LOS CONTENEDORES
 
@@ -53,7 +54,6 @@ docker-compose up -d api
 docker-compose up -d qdrant
 docker-compose up -d web
 docker-compose up -d n8n
-
 ```
 
 Al final de cada instrucción va el nombre del servicio que se definido en el archivo ***docker-compose.yml***
@@ -90,15 +90,21 @@ docker inspect Container_ID
 
 Un contenedor en estado ***UP*** puede ser pausado con:
 
-- ***docker stop Container_ID***
+```
+docker stop Container_ID
+```
 
 Para reanudar la ejecucion de un contenedor use:
 
-- ***docker start Container_ID***
+```
+docker start Container_ID
+```
 
 Para destruir un contenedor use:
 
-- ***docker rm Container_ID***
+```
+docker rm Container_ID
+``
 
 ## USO DE LOS SERVICIOS
 
