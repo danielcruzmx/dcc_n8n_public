@@ -104,7 +104,7 @@ Para destruir un contenedor use:
 
 ```
 docker rm Container_ID
-``
+```
 
 ## USO DE LOS SERVICIOS
 
