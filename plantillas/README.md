@@ -18,7 +18,22 @@ La configuración de la conexión debe considerar que la dirección IP del host 
 
 Workflow de unico nodo del tipo ***HTTP Request***, hace un llamado a la API de Python para recuperar información, la dirección del servicio debe ser ***http://10.13.0.5:4557/tablaispt*** 
 
-Para conocer los servicios que brinda la API es necesario ver su documentación en la dirección ***http://localhost:4557/docs***. Cada servicio/ruta muestra el código de llamado via ***curl***, porque puede emplearse para configurar nodos ***HTTP Request*** (boton ***Import cURL***), solo hay que cambiar la dirección ***localhost*** por la IP de la RED VIRTUAL DE DOCKER que se le asigno al servidor API.
+Para conocer los servicios que brinda la API es necesario ver su documentación en la dirección ***http://localhost:4557/docs***. Cada servicio/ruta muestra el código de llamado via ***curl***, ese código puede emplearse para configurar nodos ***HTTP Request*** (boton ***Import cURL***), solo hay que cambiar la dirección ***localhost*** por la IP de la RED VIRTUAL DE DOCKER que se le asigno al servidor API.
 
 - ***dropdown_dinamico***
+
+El nodo ***Form*** de ***N8N*** permite definir con codigo JSON sus elementos, en este Workflow se usa esa modalidad.
+
+```
+[
+   {
+    "fieldLabel": "Equipo",
+    "fieldType": "dropdown",
+    "fieldOptions": {
+      "values": {{ $json.values[0] }}
+    },
+    "requiredField": true
+  }
+]   
+```
 
