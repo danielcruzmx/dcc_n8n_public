@@ -19,7 +19,7 @@ Como herramientas adicionales:
 
 Como requisito indispensble se requiere tener instalado **DOCKER** o **PODMAN** y el complemento ***DOCKER COMPOSE***.
 
-El archivo ***docker-compose.yml*** tiene la configuración para arrancar los servicios en un **EQUIPO LOCAL**, con algunos cambios puede llevarse a un VPS y trabajar en la nube con el protocolo HTTPS -ver directorio VPS_config-.
+El archivo ***docker-compose.yml*** tiene la configuración para arrancar los servicios en un **EQUIPO LOCAL**, con algunos cambios puede llevarse a un ***VPS*** para trabajar en la nube con el protocolo ***HTTPS*** -ver directorio VPS_config-.
 
 Las imagenes base se descargan asi:
 
@@ -57,23 +57,27 @@ Para finalizar los servicios use:
 
 La instruccion anterior destruye los contenedores, mas adelante veremos como un contenedor puede pausar su ejecucion y reanudarla. 
 
-En el archivo ***docker-compose.yml*** se definen el volumen ***postgres-vol*** y la red virtual ***vpn8n***, ambos se crean al momento de arrancar cualquiera de los servicios.
+En el archivo ***docker-compose.yml*** se define el volumen ***postgres-vol*** y la red virtual ***vpn8n***, ambos se crean al momento de arrancar cualquiera de los servicios.
 
 Para conocer el estado de los contenedores use:
 
 - ***docker ps -a***
 
-La sentencia muestra la lista de los contenedores, identifique el ***Container_ID*** o el ***Nombre*** para que pueda hacer referencia a ellos.
+La sentencia muestra la lista de los contenedores, identifique el ***Container_ID***, el ***Nombre*** y su ***Estado*** para que pueda hacer referencia a ellos.
 
- En caso de problemas es posible ver los ***logs*** del contenedor con la instrucción:
+En caso de problemas es necesario ver los ***logs*** del contenedor, use la instrucción:
 
 - ***docker logs Container_ID***
+
+Para ver los parámetros de configuracion del contenedor use:
+
+- ***docker inspect Container_ID***
 
 Un contenedor en estado ***UP*** puede ser pausado con:
 
 - ***docker stop Container_ID***
 
-Para reanudar la ejecucion de un contenedor:
+Para reanudar la ejecucion de un contenedor use:
 
 - ***docker start Container_ID***
 
@@ -81,17 +85,17 @@ Para destruir un contenedor use:
 
 - ***docker rm Container_ID***
 
-## USO DE LOS CONTENEDORES
+## USO DE LOS SERVICIOS
 
 Ver README.md en cada directorio del repositorio
 
-- ***/database***	-		Uso del administrador de base de datos y creacion de tablas
-- ***/fastapi*** 	-		Uso de la api
+- ***/database***	-		Inicio del administrador de base de datos y creacion de tablas
+- ***/fastapi*** 	-		Uso de la api REST de Python
 - ***/flask*** 		- 		Arranque y uso del servidor Web
 - ***/plantillas*** -		Descripcion de las plantillas n8n
 - ***/qdrant*** 	-		Conceptos sobre base de datos vectoriales y agentes de IA
-- ***/n8n_data*** 	-		Configuración de n8n y licencia
-- ***/VPS_config*** -		Descripcion de la configuracion para VPS
+- ***/n8n_data*** 	-		Inicio de n8n y licencia
+- ***/VPS_config*** -		Descripción de la configuracion para VPS
 
 
 
