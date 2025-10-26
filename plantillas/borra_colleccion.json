@@ -1,0 +1,64 @@
+{
+  "name": "borra_colleccion",
+  "nodes": [
+    {
+      "parameters": {
+        "method": "DELETE",
+        "url": "http://10.88.0.30:6333/collections/reglamento_ley_condominal",
+        "sendHeaders": true,
+        "headerParameters": {
+          "parameters": [
+            {
+              "name": "api-key",
+              "value": "P4R4NG4R1CUT1R1M1CU4R0"
+            }
+          ]
+        },
+        "options": {}
+      },
+      "type": "n8n-nodes-base.httpRequest",
+      "typeVersion": 4.2,
+      "position": [
+        -416,
+        -192
+      ],
+      "id": "5e707dba-4e8e-4e1a-89c5-c00db953b921",
+      "name": "HTTP Request"
+    },
+    {
+      "parameters": {},
+      "type": "n8n-nodes-base.manualTrigger",
+      "typeVersion": 1,
+      "position": [
+        -624,
+        -192
+      ],
+      "id": "6dc7caf6-e3fa-4fe6-99d6-2a321ba0bea5",
+      "name": "When clicking ‘Execute workflow’"
+    }
+  ],
+  "pinData": {},
+  "connections": {
+    "When clicking ‘Execute workflow’": {
+      "main": [
+        [
+          {
+            "node": "HTTP Request",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    }
+  },
+  "active": false,
+  "settings": {
+    "executionOrder": "v1"
+  },
+  "versionId": "3cdf96eb-ebf5-467b-9849-965be5ee689d",
+  "meta": {
+    "instanceId": "ee12959d439f9263224a6ea6816a41bfdef83ed3d1d86cb7d7ef4a897c1afb24"
+  },
+  "id": "E6sp7IceTpcoYkE1",
+  "tags": []
+}

@@ -119,7 +119,7 @@ Ver README.md de cada directorio.
 - ***/fastapi*** 	-		Uso de la API REST de Python
 - ***/flask*** 		- 		Arranque y uso del servidor Web
 - ***/plantillas*** -		Descripcion de las plantillas n8n
-- ***/qdrant*** 	-		Conceptos sobre base de datos vectoriales y agentes de IA
+- ***/qdrant*** 	-		Configuración del servicio
 - ***/n8n_data*** 	-		Inicio de n8n y licencia
 - ***/VPS_config*** -		Descripción de la configuracion para VPS
 

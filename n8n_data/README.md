@@ -46,7 +46,7 @@ Las tareas más adecuadas para IA incluyen:
 - Descomposición de tareas complejas
 - Busqueda y sintesis de información
 
-Toma esto en cuenta en tu aprendizaje de esta magnifica herramienta.
+Toma esto en cuenta durante el aprendizaje de esta magnifica herramienta.
 
 
 

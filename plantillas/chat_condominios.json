@@ -1,0 +1,224 @@
+{
+  "name": "chat_condominios",
+  "nodes": [
+    {
+      "parameters": {
+        "options": {}
+      },
+      "type": "@n8n/n8n-nodes-langchain.lmChatGoogleGemini",
+      "typeVersion": 1,
+      "position": [
+        112,
+        208
+      ],
+      "id": "30571036-7594-4880-a0c1-ca1355712125",
+      "name": "Google Gemini Chat Model",
+      "credentials": {
+        "googlePalmApi": {
+          "id": "z5kFfajRtirnOQ4F",
+          "name": "Google Gemini(PaLM) Api account"
+        }
+      }
+    },
+    {
+      "parameters": {},
+      "type": "@n8n/n8n-nodes-langchain.embeddingsGoogleGemini",
+      "typeVersion": 1,
+      "position": [
+        656,
+        384
+      ],
+      "id": "0451f77e-d139-4345-88a8-b9ab7bc09ff4",
+      "name": "Embeddings Google Gemini",
+      "credentials": {
+        "googlePalmApi": {
+          "id": "z5kFfajRtirnOQ4F",
+          "name": "Google Gemini(PaLM) Api account"
+        }
+      }
+    },
+    {
+      "parameters": {},
+      "type": "@n8n/n8n-nodes-langchain.memoryBufferWindow",
+      "typeVersion": 1.3,
+      "position": [
+        288,
+        208
+      ],
+      "id": "6f55b2d4-55f9-4322-b463-3b9e0901f990",
+      "name": "Simple Memory"
+    },
+    {
+      "parameters": {
+        "options": {
+          "systemMessage": "=Eres un agente especializado y experto en el Régimen de Propiedad en Condominio de Inmuebles para la Ciudad de México (CDMX). Tu conocimiento se basa exclusivamente en la Ley de Propiedad en Condominio de Inmuebles para el Distrito Federal y el Reglamento de esa ley, así como todas sus actualizaciones y reformas más recientes.\n\nTu objetivo principal es proporcionar información precisa, detallada y actualizada sobre esta legislación. \n\nDebes ser capaz de:\n\nResponder preguntas sobre derechos y obligaciones de condóminos y administradores.\n\nAclarar dudas sobre la constitución, administración y extinción de condominios.\n\nExplicar procedimientos y requisitos legales.\n\nOrientar sobre la resolución de conflictos dentro del marco legal.\n\nLas respuestas deben ser claras, concisas, basadas en la legislación vigente y, siempre que sea posible, citar el artículo o sección específica de la ley o reglamento aplicable. \n\nMantén un tono formal y objetivo.\n\nImportante: Debes recordar en tus interacciones que no eres un abogado y que la información que proporcionas es de carácter informativo general y no constituye asesoría legal personalizada. \n\nSiempre se debe recomendar al usuario buscar la opinión de un profesional del derecho para casos específicos o situaciones legales complejas. Si la información solicitada no está en tu base de conocimiento o si la pregunta es ambigua, indícalo claramente y solicita mayor precisión.\n\nConsidera los datos que tengo en la base local Qdrant Vector Store 1 y Qdrant Vector Store 2, ahi esta la version mas reciente de la ley de propiedad en condominio de inmuebles para el distrito federal ahora ciudad de mexico y el reglamento de la ley de propiedad en condominio de inmuebles para el distrito federal."
+        }
+      },
+      "type": "@n8n/n8n-nodes-langchain.agent",
+      "typeVersion": 2.1,
+      "position": [
+        224,
+        0
+      ],
+      "id": "f14c5a8a-dbbd-4faa-b705-1020468cc97e",
+      "name": "AI Agent"
+    },
+    {
+      "parameters": {
+        "public": true,
+        "initialMessages": "Hola ! 👋\n\nEn que puedo ayudarte ?",
+        "options": {}
+      },
+      "type": "@n8n/n8n-nodes-langchain.chatTrigger",
+      "typeVersion": 1.1,
+      "position": [
+        0,
+        0
+      ],
+      "id": "bb807ddb-56ac-4510-bd57-87ec96f27861",
+      "name": "When chat message received",
+      "webhookId": "0db8755d-5585-4d92-bb56-d2abed4d919f"
+    },
+    {
+      "parameters": {
+        "mode": "retrieve-as-tool",
+        "toolDescription": "reglamento de la ley",
+        "qdrantCollection": {
+          "__rl": true,
+          "value": "reglamento_ley_condominal",
+          "mode": "list",
+          "cachedResultName": "reglamento_ley_condominal"
+        },
+        "options": {}
+      },
+      "type": "@n8n/n8n-nodes-langchain.vectorStoreQdrant",
+      "typeVersion": 1.3,
+      "position": [
+        800,
+        208
+      ],
+      "id": "9c149f52-eb7b-47d9-a0a5-53df2945ea29",
+      "name": "Qdrant Vector Store 2",
+      "credentials": {
+        "qdrantApi": {
+          "id": "09MpbPZvbb3vtdKe",
+          "name": "QdrantApi account"
+        }
+      }
+    },
+    {
+      "parameters": {
+        "mode": "retrieve-as-tool",
+        "toolDescription": "ley condominal",
+        "qdrantCollection": {
+          "__rl": true,
+          "value": "ley_condominal",
+          "mode": "list",
+          "cachedResultName": "ley_condominal"
+        },
+        "options": {}
+      },
+      "type": "@n8n/n8n-nodes-langchain.vectorStoreQdrant",
+      "typeVersion": 1.3,
+      "position": [
+        464,
+        208
+      ],
+      "id": "60aee7ae-5356-4b8a-8d99-13b6ca05a7af",
+      "name": "Qdrant Vector Store 1",
+      "credentials": {
+        "qdrantApi": {
+          "id": "09MpbPZvbb3vtdKe",
+          "name": "QdrantApi account"
+        }
+      }
+    }
+  ],
+  "pinData": {},
+  "connections": {
+    "Google Gemini Chat Model": {
+      "ai_languageModel": [
+        [
+          {
+            "node": "AI Agent",
+            "type": "ai_languageModel",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "Embeddings Google Gemini": {
+      "ai_embedding": [
+        [
+          {
+            "node": "Qdrant Vector Store 1",
+            "type": "ai_embedding",
+            "index": 0
+          },
+          {
+            "node": "Qdrant Vector Store 2",
+            "type": "ai_embedding",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "Simple Memory": {
+      "ai_memory": [
+        [
+          {
+            "node": "AI Agent",
+            "type": "ai_memory",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "When chat message received": {
+      "main": [
+        [
+          {
+            "node": "AI Agent",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "Qdrant Vector Store 2": {
+      "ai_tool": [
+        [
+          {
+            "node": "AI Agent",
+            "type": "ai_tool",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "Qdrant Vector Store 1": {
+      "ai_tool": [
+        [
+          {
+            "node": "AI Agent",
+            "type": "ai_tool",
+            "index": 0
+          }
+        ]
+      ]
+    }
+  },
+  "active": true,
+  "settings": {
+    "executionOrder": "v1",
+    "timezone": "America/Mexico_City",
+    "callerPolicy": "workflowsFromSameOwner"
+  },
+  "versionId": "dfb4fa21-94a8-45e5-b031-866e56a46bf5",
+  "meta": {
+    "templateCredsSetupCompleted": true,
+    "instanceId": "ee12959d439f9263224a6ea6816a41bfdef83ed3d1d86cb7d7ef4a897c1afb24"
+  },
+  "id": "wyF05xBlmBMrWgJa",
+  "tags": []
+}
