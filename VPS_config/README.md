@@ -1,11 +1,12 @@
 ## Descripción de la configuracion para VPS
 
+### ACME
+
 Mi ***VPS*** esta en Hostinger, uso ***acme-companion*** que junto con ***nginx-proxy*** ayudan a automatizar completamente la obtención y renovación de certificados ***HTTPS*** de Let's Encrypt. 
 
 https://github.com/nginx-proxy/acme-companion.git
 
-
-El esquema con ***acme-companion*** genera dos contenedores principales para su funcionamiento:
+Esta herramienta genera dos contenedores para su funcionamiento:
 
 1. ***nginx-proxy*** que actúa como un proxy inverso que redirige el tráfico entrante (puertos 80 y 443) a los contenedores de aplicaciones según el dominio (RED VIRTUAL DE DOCKER). Se encarga de enrutar las solicitudes ***HTTP/HTTPS*** a los servicios correctos en la red Docker.
 
@@ -13,9 +14,15 @@ El esquema con ***acme-companion*** genera dos contenedores principales para su 
 
 En resumen, el modelo es ideal para entornos Docker donde se desea HTTPS sencillo y automatizado.
 
+En DigitalOcean tengo esta configuración y en su oportunidad lo documente
+
+https://dancruzmx.medium.com/configuraci%C3%B3n-de-un-servidor-proxy-nginx-en-centos7-y-contenedores-docker-180b0440a6b7
+
 ### CONFIGURACION PARA LOS CONTENEDORES
 
-Solo se deben configurar con las variables de ambiente ***VIRTUAL_HOST*** y ***LETSENCRYPT_HOST*** los contenedores con los servicios que van a salir al exterior, por ejemplo: 
+Con ***acme-companion*** solo se necesitan agrear las variables de ambiente ***VIRTUAL_HOST***, ***LETSENCRYPT_EMAIL*** y ***LETSENCRYPT_HOST***, como se muestra a continuación:
+
+***Nota***.- En esta configuración la red virtual de docker se nombra ***podman*** y no se asignan direcciones IP a los contenedores, docker las asigna de manera automática, si requiere saber la IP asignada use la instrucción ***docker inspect Container_ID | grep IPAddress***
 
 ```
 services:
@@ -45,4 +52,14 @@ networks:
    external:
     name: podman
 ```
+
+El servidor API REST esta en la dirección https://api.midominio.com/docs
+
+Es importante mencionar que la herramienta ACME Companion requiere de un dominio válido para emitir certificados. Esto se debe a que el protocolo ACME valida la propiedad del dominio antes de emitir un certificado. ***Sin un dominio registrado y accesible, el proceso de verificación no puede completarse***. Debes poseer un dominio y tener control sobre su configuración DNS o servidor web.
+
+No todos los contenedores deben ser configurados de esta manera, solo se deben configurar los servicios que deseas compartir o acceder en la nube. Por supuesto que el servidor de ***N8N*** debe ser uno de ellos.
+
+
+
+
 
