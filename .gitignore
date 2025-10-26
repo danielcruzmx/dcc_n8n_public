@@ -6,9 +6,15 @@
 *.pdf
 *.sqlite
 *.zip
+*.journal
 
 
-n8n_data/
+n8n_data/binaryData/
+n8n_data/git/
+n8n_data/nodes/
+n8n_data/ssh/
+n8n_data/config
+
 qdrant/*
 __pycache__/
 staticfiles

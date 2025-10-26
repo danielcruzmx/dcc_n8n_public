@@ -15,15 +15,23 @@ Y como herramientas adicionales:
 - **Redis** -		Cache
 - **Qdrant** -		Base de datos vectorial para agentes de IA
 
-### INSTALACION
+### INSTALACIÓN
 
 Como requisito indispensble se requiere tener instalado **DOCKER** o **PODMAN** y el complemento ***DOCKER COMPOSE***.
 
-#### Archivo docker-compose.yml
+#### Archivo ***docker-compose.yml***
 
-El archivo ***docker-compose.yml*** tiene la configuración para arrancar los servicios en un **EQUIPO LOCAL**, con algunos cambios puede llevarse a un ***VPS*** para trabajar en la nube con el protocolo ***HTTPS*** -ver directorio VPS_config-.
+- Tiene la configuración necesaria para arrancar los servicios en un **EQUIPO LOCAL**.
+- Con algunos cambios puede llevarse a un ***VPS*** y trabajar con el protocolo ***HTTPS*** -ver directorio VPS_config-.
+- Define el volumen ***postgres-vol*** para persistir la base de datos.
+- Define la red virtual ***vpn8n*** con el rango de direcciones 10.13.0.0/16
+- Cada contenedor tiene asignada su dirección IP dentro del rango anterior.
+- El volumen y la red virtual se crean automaticamente al arrancar un servicio con docker-compose
+- En algunos servicios esta definido el usuario de acceso y su contraseña.
 
-Las imagenes base se descargan asi:
+#### Imagenes de los contenedores
+
+Así se descargan:
 
 ```
 docker pull postgres:latest
@@ -43,7 +51,7 @@ docker build -t python3_flask2 -f dockerfile
 docker build -t python3_fastapi1 -f dockerfile
 ```
 
-### ARRANQUE Y ADMINISTRACION DE LOS CONTENEDORES
+#### Arranque y administración de los contenedores
 
 Recomiendo arrancar los servicios uno a uno en el siguiente orden:
 
@@ -57,8 +65,6 @@ docker-compose up -d web
 docker-compose up -d n8n
 ```
 
-Al final de cada instrucción va el nombre del servicio que se definido en el archivo ***docker-compose.yml***
-
 Para finalizar los servicios use:
 
 ```
@@ -66,8 +72,6 @@ docker-compose down
 ``` 
 
 La instruccion anterior destruye los contenedores, mas adelante veremos como un contenedor puede pausar su ejecucion y reanudarla. 
-
-En el archivo ***docker-compose.yml*** se define el volumen ***postgres-vol*** y la red virtual ***vpn8n***, ambos se crean al momento de arrancar cualquiera de los servicios.
 
 Para conocer el estado de los contenedores use:
 
@@ -109,10 +113,10 @@ docker rm Container_ID
 
 ### USO DE LOS SERVICIOS
 
-Ver README.md en cada directorio del repositorio
+Ver README.md de cada directorio.
 
 - ***/database***	-		Inicio del administrador de base de datos y creacion de tablas
-- ***/fastapi*** 	-		Uso de la api REST de Python
+- ***/fastapi*** 	-		Uso de la API REST de Python
 - ***/flask*** 		- 		Arranque y uso del servidor Web
 - ***/plantillas*** -		Descripcion de las plantillas n8n
 - ***/qdrant*** 	-		Conceptos sobre base de datos vectoriales y agentes de IA
