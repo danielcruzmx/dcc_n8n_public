@@ -133,7 +133,7 @@ En la dirección ***http://localhost:8015*** esta PgAdmin, el administrador de l
 
 En el administrador configure la conexión para PostgreSql, use el icono ***Agregar un Nuevo Servidor***, el nombre de la conexión puede ser por ejemplo ***local***. 
 
-Ubique la ceja ***Conexión*** y especifique la ***Dirección del servidor***, debe ser la IP asignada al contenedor de PostgreSql ***10.13.0.2***, el usuario por default es ***postgres*** al igual que la base de datos, la contraseña esta definida en el ***docker-compose.yml***
+Ubique la ceja ***Conexión*** y especifique la ***Dirección del servidor***, debe ser la IP asignada al contenedor de PostgreSql ***10.13.0.2***, el usuario por default es ***postgres*** al igual que la base de datos. La contraseña esta definida en el archivo ***docker-compose.yml***
 
 A la izquierda del administrador siempre vera el ***arbol de objetos*** de la base de datos, clic del boton derecho del raton sobre un objeto permite administrar sus elementos.
 
