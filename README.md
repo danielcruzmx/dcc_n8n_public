@@ -291,7 +291,7 @@ Donde usar RAG:
 
 Retos:
 
-- ***Integración de sistemas***, debe combinarse con un Modelo de Lenguaje (LLM).
+- ***Integración de sistemas***, debe combinarse con un Modelo de Lenguaje (***LLM***).
 - ***Escalabilidad y rendimiento***, La generación de incrustaciones y recuperación de datos en tiempo real son operaciones intensivas en computación.
 - ***Calidad y actualización de los datos***, requiere la actualización constante de los documentos para mantener la pecisión del sistema.
 
@@ -311,7 +311,7 @@ La configuración de la conexión debe considerar que la dirección IP del host 
 
 #### - api_http_request.json
 
-Workflow de unico nodo del tipo ***HTTP Request***, hace un llamado a la API de Python para recuperar información, la dirección del servicio debe ser ***http://10.13.0.5:4557/tablaispt*** 
+Workflow de unico nodo del tipo ***HTTP Request***, hace un llamado a la API de Python para recuperar información, la dirección del servicio de ejemplo es: ***http://10.13.0.5:4557/tablaispt*** 
 
 Para conocer los servicios que brinda la API es necesario ver su documentación en la dirección ***http://localhost:4557/docs***. 
 
