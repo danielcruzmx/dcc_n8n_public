@@ -33,7 +33,7 @@ Y como herramientas adicionales:
 
 ### INSTALACIÓN
 
-Como requisito indispensble se requiere tener instalado **DOCKER** o **PODMAN** y el complemento ***DOCKER COMPOSE***.
+Como requisito indispensble se requiere tener instalado **DOCKER** o **PODMAN** y ***DOCKER COMPOSE***.
 
 #### Archivo docker-compose.yml
 
@@ -129,7 +129,7 @@ docker rm Container_ID
 
 ### CONEXIÓN A BASE DE DATOS POSTGRESQL
 
-En la dirección ***http://localhost:8015*** esta PgAdmin, el administrador de la base de datos, para acceder se requiere el correo y contraseña definidos en el archivo ***docker-compose.yml***.
+En la dirección ***http://localhost:8015*** esta PgAdmin, el administrador de la base de datos. Para acceder se requiere el correo y contraseña definidos en el archivo ***docker-compose.yml***.
 
 En el administrador configure la conexión para PostgreSql, use el icono ***Agregar un Nuevo Servidor***, el nombre de la conexión puede ser por ejemplo ***local***. 
 
