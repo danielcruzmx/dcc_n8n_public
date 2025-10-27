@@ -10,18 +10,19 @@
 - [Documentación de la API REST de Python](#documentación-de-la-api-rest-de-python)  
 - [Cache con Redis](#cache-con-redis) 
 - [Inicio de N8N y licencia](#inicio-de-n8n-y-licencia)
+- [Determinismo e IA](#determinismo-e-ia)
 - [Inicio y configuración de Qdrant](#inicio-y-configuración-de-qdrant)
 - [Bases de datos vectoriales e IA](#bases-de-datos-vectoriales-e-IA)
 - [RAG Generación aumentada por recuperación](#rag-generación-aumentada-por-recuperación)
-- [Configuración para VPS](#configuración-para-vps)
 - [Descripción de plantillas](#descripción-de-plantillas)
+- [Configuración para VPS](#configuración-para-vps)
 
 ### HERRAMIENTAS
 
 Uso tres herramientas principales:
 
 1. **Docker** que facilita la infraestructura
-2. **Python** con sus frameworks ***FastApi*** para una rapida recuperación y actualización de datos y ***Flask*** para la ejecución de procesos en un servidor web
+2. **Python** con sus frameworks ***FastApi*** para una rapida recuperación y actualización de datos y ***Flask*** para la ejecución de procesos en un servidor Web
 3. **N8N** para la automatización e integracion con otras herramientas como agentes de IA, correo electronico, almacenamiento en la nube y mensajeria
 
 Y como herramientas adicionales:
@@ -47,7 +48,7 @@ Como requisito indispensble se requiere tener instalado **DOCKER** o **PODMAN** 
 
 #### Imagenes de los contenedores
 
-Así se descargan:
+Descarga:
 
 ```
 docker pull postgres:latest
@@ -151,11 +152,11 @@ Los archivos ***tipo_tabla.csv*** y ***tabla_ispt.csv*** tienen los datos necesa
 
 Clic del boton derecho del raton sobre el nombre de cada tabla nos da la opcion de **Import/Export Data**. 
 
-Seleccione ***Importar*** y a la derecha de ***Nombre de archivo*** esta el icono que sirve para administrar el directorio, ubique el menu de tres puntos***...***, tiene la opcion ***Upload*** para abrir la ventana donde podra arrastrar los archivos de datos **.csv** y completar la tarea de importación.
+Seleccione ***Importar*** y a la derecha de ***Nombre de archivo*** de clic sobre el icono que sirve para administrar el directorio, ubique el menu de tres puntos ***...***, tome la opcion ***Upload*** que abre la ventana donde podra arrastrar los archivos de datos **.csv** y completar la tarea de importación.
 
 ### MODELO DE DATOS NORTHWIND
 
-En este directorio se encuentra la imagen ***.png*** y el script ***.sql*** del modelo de datos ***northwind***, instale con la ayuda del arbol de objetos.
+En el directorio ***database*** se encuentra la imagen ***.png*** y el script ***.sql*** del modelo de datos ***northwind***, instale con la ayuda del arbol de objetos.
 
  Botón derecho sobre el objeto ***Bases de Datos*** le permite creer la base de datos ***northwind***.
 
@@ -167,14 +168,14 @@ https://dancruzmx.medium.com/aprende-sql-1ra-parte-conceptos-de-base-de-datos-63
 
 ### DOCUMENTACIÓN DE LA API REST DE PYTHON
 
-En la dirección ***http://localhost:4557/docs*** se muestra la documentación de los servicios programados, clic del raton sobre una ruta especifica despliega mayor información.
+En la dirección ***http://localhost:4557/docs*** se muestra la documentación de los servicios API REST programados, clic del raton sobre una ruta especifica despliega mayor información.
 
-- Parametros requeridos por el servicio, nombre y tipo
+- Parametros requeridos por el servicio, nombre y tipo.
 - Botones para la ejecución del servicio ***Try it out*** y posteriormente ***Execute***.
 - Area de respuesta, codigo, tipo de respuesta y resultado.
-- Sentencia ***curl*** de llamado
+- Sentencia ***CURL*** de llamado.
 
-Es importante estar atento a la caja de texto ***curl***, esas lineas se usan para configurar nodos ***HTTP Request*** en N8N.
+Es importante estar atento a la caja de texto ***CURL***, esas lineas se usan para configurar nodos ***HTTP Request*** en N8N.
 
 #### Creación de nuevos servicios
 
@@ -190,7 +191,7 @@ Simplemente hay que seguir los pasos:
 
 ### CACHE CON REDIS
 
-Cuando se llama a un servicio por primera vez la API ejecuta la sentencia SQL para recuperar los datos y los almacena en la instancia de ***REDIS*** con una llave de acceso. Para llamados posteriores la API recupera los datos de la instancia de ***REDIS***.
+Cuando se llama a un servicio API REST por primera vez, se ejecuta la sentencia SQL para recuperar los datos y se almacenan en la instancia de ***REDIS*** con una llave de acceso. Para llamados posteriores la API recupera los datos de la instancia de ***REDIS***.
 
 Es importante señalar que la definicion de la llave de acceso en ***REDIS*** tiene tiempo de vencimiento, esto significa que en algun momento la recuperación de los datos se hará nuevamente de la base de datos.
 
@@ -206,7 +207,45 @@ Cuando se entra por primera vez, aperece un formulario donde se solicita una dir
 
 #### Activación de la licencia
 
-En el ambiente de trabajo de ***N8N***, abajo a la izquierda, donde aparece el ***nombre del usuario*** está el menu de tres puntos***...***, tome la opción ***Settings*** y posteriormente presione el botón ***Enter activation key***, digite la licencia que llego a su correo y acepte para completar el proceso de configuración.
+En el ambiente de trabajo de ***N8N***, abajo a la izquierda, donde aparece el ***nombre del usuario*** está el menu de tres puntos ***...***, tome la opción ***Settings*** y posteriormente presione el botón ***Enter activation key***, digite la licencia que llego a su correo y acepte para completar el proceso de configuración.
+
+#### Sobre N8N
+
+Crear ***Workflows*** es muy sencillo, existen muchos video tutoriales en la red que puedes consultar.
+
+Algunas de mis plantillas -***Workflows***- son muy sencillas, las de nodo unico sirven para ilustrar como debe configurarse y usarse un nodo dentro de una red de contenedores.
+
+Otros ***Workflow*** son mas elaboradas y representan soluciones a problemas reales.
+
+Lo que más me entusiasma de ***N8N*** no son los ***agentes de IA***, es su facilidad de integración con WhatsApp, Telegram, PostgreSql y la Suite de Google (Gmail, Drive, Hojas de cálculo, Documentos, Calendario, Contactos ...)
+
+Mis soluciones se basan en scripts de Python y no soy hábil para desarrollar interfaces -***FrontEnd***-, entonces ***N8N*** me facilita esa tarea.
+
+Recibo mensajes o correos con datos adjuntos que desencadenan la ejecución de una solución y dan la respuesta, ***por supuesto en modo desatendido***.
+
+Inclusive ***N8N*** me brinda la posibilidad de generar formularios ***dinámicos*** para el ingreso de datos. El nodo ***Form*** tiene la opción de definir sus elementos con código ***JSON***, esto hace posible la construcción de formularios basados en datos previos.
+
+### DETERMINISMO E IA
+
+El determinismo en computación se refiere a que, dadas unas mismas entradas y condiciones iniciales, un algoritmo o sistema siempre producirá la misma salida y seguirá la misma secuencia de estados durante su ejecución. Es decir, su comportamiento es completamente predecible.
+
+Muchas soluciones de IA son no deterministas, esto significa que ante la misma entrada pueden producir respuestas ligeramente diferentes en distintas ejecuciones. Aunque su naturaleza es probabilistica algunas aplicaciones de IA pueden ser deterministas, especialmente cuando:
+
+- Se usan algoritmos clásicos (reglas lógicas).
+- Se combinan modelos de IA con sistemas deterministas (recuperación de datos exactos, generación de consultas SQL o llamado a servicios API REST).
+
+***N8N*** es una herramienta determinista por naturaleza (mismas entradas -> mismas salidas), entonces en ***N8N*** debes delegar a los agentes de IA tareas que requieran razonamiento, comprensión del lenguaje o toma de decisiones. 
+
+Las tareas más adecuadas para IA incluyen:
+
+- Procesamiento de lenguaje natural
+- Generación de contenido
+- Clasificación de datos
+- **Extracción** de datos en documentos no estructurados
+- Descomposición de tareas complejas
+- Busqueda y sintesis de información
+
+Toma esto en cuenta durante el aprendizaje de esta magnifica herramienta.
 
 ### INICIO Y CONFIGURACIÓN DE QDRANT
 
@@ -233,7 +272,7 @@ Lo anterior permite a los agentes proporcionar respuestas precisas y verificable
 
 ### RAG GENERACIÓN AUMENTADA POR RECUPERACIÓN
 
-Es una técnica de IA que recupera información de fuentes externas y la utiliza como contexto para genera respuestas. Es útil en situaciones donde la actualidad y el contexto son cruciales para generar respuestas precisas y relevantes.
+Es una técnica de IA que recupera información de fuentes externas y la utiliza como contexto para generar respuestas. Es útil en situaciones donde la actualidad y el contexto son cruciales para generar respuestas precisas y relevantes.
 
 Funcionamiento:
 
@@ -255,66 +294,7 @@ Retos:
 
 - ***Integración de sistemas***, debe combinarse con un Modelo de Lenguaje (LLM).
 - ***Escalabilidad y rendimiento***, La generación de incrustaciones y recuperación de datos en tiempo real son operaciones intensivas en computación.
-- ***Calidad y actualización de los datos***, requiere la actualización constante de los documentos par amantener la pecisión del sistema.
-
-### CONFIGURACIÓN PARA VPS
-
-Mi ***VPS*** esta en Hostinger, uso ***acme-companion*** que junto con ***nginx-proxy*** ayudan a automatizar completamente la obtención y renovación de certificados ***HTTPS*** de Let's Encrypt. 
-
-https://github.com/nginx-proxy/acme-companion.git
-
-Esta herramienta genera dos contenedores para su funcionamiento:
-
-1. ***nginx-proxy*** que actúa como un proxy inverso que redirige el tráfico entrante (puertos 80 y 443) a los contenedores de aplicaciones según el dominio (RED VIRTUAL DE DOCKER). Se encarga de enrutar las solicitudes ***HTTP/HTTPS*** a los servicios correctos en la red Docker.
-
-2. ***acme-companion*** que se encarga de obtener y renovar automáticamente certificados ***SSL/TLS*** de Let's Encrypt para los dominios configurados. Escucha los eventos de Docker y cuando detecta un contenedor con la variable ***LETSENCRYPT_HOST***, solicita un certificado mediante el protocolo ACME.
-
-En resumen, el modelo es ideal para entornos Docker donde se desea HTTPS sencillo y automatizado.
-
-En DigitalOcean uso una configuración similar, en su oportunidad lo documente
-
-https://dancruzmx.medium.com/configuraci%C3%B3n-de-un-servidor-proxy-nginx-en-centos7-y-contenedores-docker-180b0440a6b7
-
-#### Configuración para los contenedores
-
-Con ***acme-companion*** solo se necesitan agrear las variables de ambiente ***VIRTUAL_HOST***, ***LETSENCRYPT_EMAIL*** y ***LETSENCRYPT_HOST***, como se muestra a continuación:
-
-***Nota***.- En esta configuración la red virtual de docker se nombra ***podman*** y no se asignan direcciones IP a los contenedores, docker las asigna de manera automática, si requiere saber la IP asignada use la instrucción ***docker inspect Container_ID | grep IPAddress***
-
-```
-services:
-    
-    api:
-        image: python3_fastapi1:latest
-        volumes:
-            - ./fastapi:/home
-        environment:
-            - VIRTUAL_HOST=api.midominio.com
-            - LETSENCRYPT_HOST=api.midominio.com
-            - LETSENCRYPT_EMAIL=api.main@gmail.com
-            - HOSTDB=10.88.0.4
-            - CACHE=10.88.0.26
-            - USERDB=postgres
-            - PASSDB=P0stgr3s
-            - PORTDB=5432
-            - DATABASE=postgres
-        ports:
-            - "0.0.0.0:4557:4557"
-        entrypoint: /bin/bash -c 'cd /home && uvicorn main:app --host 0.0.0.0 --port 4557 --reload --workers 1 '
-        tty: true
-        networks: [default, proxy]
-
-networks:
-  proxy:
-   external:
-    name: podman
-```
-
-El servidor API REST queda en la dirección https://api.midominio.com/docs
-
-Es importante mencionar que la herramienta ACME Companion requiere de un dominio válido para emitir certificados. Esto se debe a que el protocolo ACME valida la propiedad del dominio antes de emitir un certificado. ***Sin un dominio registrado y accesible, el proceso de verificación no puede completarse***. Debes poseer un dominio y tener control sobre su configuración DNS o servidor web.
-
-No todos los contenedores deben ser configurados de esta manera, solo se deben configurar los servicios que deseas compartir o acceder en la nube. Por supuesto que el servidor de ***N8N*** debe ser uno de ellos.
+- ***Calidad y actualización de los datos***, requiere la actualización constante de los documentos para mantener la pecisión del sistema.
 
 ### DESCRIPCIÓN DE PLANTILLAS
 
@@ -381,3 +361,61 @@ Una vez generado mi propio calendario de juegos, la intención es construir otro
 
 #### - carga_leyes.json 
 
+### CONFIGURACIÓN PARA VPS
+
+Mi ***VPS*** esta en Hostinger, uso ***acme-companion*** que junto con ***nginx-proxy*** ayudan a automatizar completamente la obtención y renovación de certificados ***HTTPS*** de Let's Encrypt. 
+
+https://github.com/nginx-proxy/acme-companion.git
+
+Esta herramienta genera dos contenedores para su funcionamiento:
+
+1. ***nginx-proxy*** que actúa como un proxy inverso que redirige el tráfico entrante (puertos 80 y 443) a los contenedores de aplicaciones según el dominio (RED VIRTUAL DE DOCKER). Se encarga de enrutar las solicitudes ***HTTP/HTTPS*** a los servicios correctos en la red Docker.
+
+2. ***acme-companion*** que se encarga de obtener y renovar automáticamente certificados ***SSL/TLS*** de Let's Encrypt para los dominios configurados. Escucha los eventos de Docker y cuando detecta un contenedor con la variable ***LETSENCRYPT_HOST***, solicita un certificado mediante el protocolo ACME.
+
+En resumen, el modelo es ideal para entornos Docker donde se desea HTTPS sencillo y automatizado.
+
+En DigitalOcean uso una configuración similar, en su oportunidad lo documente
+
+https://dancruzmx.medium.com/configuraci%C3%B3n-de-un-servidor-proxy-nginx-en-centos7-y-contenedores-docker-180b0440a6b7
+
+#### Configuración para los contenedores
+
+Con ***acme-companion*** solo se necesitan agrear las variables de ambiente ***VIRTUAL_HOST***, ***LETSENCRYPT_EMAIL*** y ***LETSENCRYPT_HOST***, como se muestra a continuación:
+
+***Nota***.- En esta configuración la red virtual de docker se nombra ***podman*** y no se asignan direcciones IP a los contenedores, docker las asigna de manera automática, si requiere saber la IP asignada a un contenedor use la instrucción ***docker inspect Container_ID | grep IPAddress***
+
+```
+services:
+    
+    api:
+        image: python3_fastapi1:latest
+        volumes:
+            - ./fastapi:/home
+        environment:
+            - VIRTUAL_HOST=api.midominio.com
+            - LETSENCRYPT_HOST=api.midominio.com
+            - LETSENCRYPT_EMAIL=api.main@gmail.com
+            - HOSTDB=10.88.0.4
+            - CACHE=10.88.0.26
+            - USERDB=postgres
+            - PASSDB=P0stgr3s
+            - PORTDB=5432
+            - DATABASE=postgres
+        ports:
+            - "0.0.0.0:4557:4557"
+        entrypoint: /bin/bash -c 'cd /home && uvicorn main:app --host 0.0.0.0 --port 4557 --reload --workers 1 '
+        tty: true
+        networks: [default, proxy]
+
+networks:
+  proxy:
+   external:
+    name: podman
+```
+
+El servidor API REST queda en la dirección https://api.midominio.com/docs
+
+Es importante mencionar que la herramienta ACME Companion requiere de un dominio válido para emitir certificados. Esto se debe a que el protocolo ACME valida la propiedad del dominio antes de emitir un certificado. ***Sin un dominio registrado y accesible, el proceso de verificación no puede completarse***. Debes poseer un dominio y tener control sobre su configuración DNS o servidor web.
+
+No todos los contenedores deben ser configurados de esta manera, solo se deben configurar los servicios que deseas compartir o acceder en la nube. Por supuesto que el servidor de ***N8N*** debe ser uno de ellos.
