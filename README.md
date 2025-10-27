@@ -1,6 +1,5 @@
 ## Python y automatizaciones N8N con contenedores
 
-## INDICE
 - [Herramientas](#herramientas)
 - [Instalación](#instalación)
 - [Arranque y administración de contenedores](#arranque-y-administración-de-contenedores)
@@ -354,12 +353,42 @@ La solución consiste en:
 7. Crear un nodo ***Set*** que asigne a cada evento un ID propio
 7. Crear un nodo ***Calendar*** que genere mis eventos (partidos) con los datos previos
 
-Una vez generado mi propio calendario de juegos, la intención es construir otro Workflow que generare cada semana la lista de encuentros y la envie a mis contactos para que hagan sus pronosticos.
+Una vez generado mi propio calendario de juegos, la intención es construir otro Workflow que generare cada semana la lista de encuentros y la envie a mis contactos para que hagan sus pronósticos.
+
+#### - carga_leyes.json 
+
+Este Workflow es el ejemplo del uso de RAG, la descripción del flujo es:
+
+1. Mediante formulario se ingresa un archivo PDF con la ley de propiedad en condominio de mi ciudad. 
+2. Un agente de IA extrae la siguiente información del documento: 
+	- Resumen 
+	- Descripcion
+	- Analisis
+	- Conclusión  
+	- Palabras clave
+3. Al mismo tiempo un nodo con codigo JavaScript separa las leyes por TITULO, CAPITULO y ARTICULO.
+4. Se combina la información de los puntos 2 y 3 (nodo Merge) 
+5. Con la ayuda de un agente de IA se almacena la información en una base de datos vectorial.
+
+***Estas acciones estan definidas en el funcionamiento de RAG***. La información recolectada debe ser segmentada y convertida a representaciones vectoriales.
+
+Posterior a la carga de la ley condominal se hace lo mismo con el reglamento de la ley, la información de ambos documentos queda en la misma base de datos pero en colecciones distintas. 
 
 #### - chat_condominios.json
 
+Este Workflow es un chatbot "especializado" que responde preguntas relacionadas con la ley de propiedad en condominio de mi ciudad y su reglamento.
 
-#### - carga_leyes.json 
+Usa la información almacenada con el Workflow ***carga-leyes.json***
+
+#### - borra_coleccion.JSON
+
+Este Workflow de unico nodo sirve para borrar colecciones de la base de datos vectorial. 
+
+Si por alguna razón la ley de propiedad en condominio cambia hay que borrar su contenido de la base de datos y volverlo a cargar (Punto 7 del funcionamiento de un sistema RAG).   
+
+No hay que olvidar que la referencia a la base de datos vectorial es:
+
+http://10.13.0.6:6333
 
 ### CONFIGURACIÓN PARA VPS
 
