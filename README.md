@@ -1,13 +1,16 @@
-## Índice
-- [Título del Proyecto](#título-del-proyecto)
+## Python y automatizaciones N8N con contenedores
+
+## INDICE
+- [Herramientas](#herramientas)
 - [Instalación](#instalación)
+  - [Archivo docker-compose-yml](#docker-compose.yml)
+  - [Imagenes](#imagenes)
+  - [Arranque y administración de contenedores](#arranque)
 - [Uso](#uso)
 - [Documentación](#documentación)
 - [Estructura del Proyecto](#estructura-del-proyecto)   
 
-## Python y automatizaciones N8N con contenedores
-
-### RESUMEN
+### HERRAMIENTAS
 
 Uso tres herramientas principales:
 
@@ -26,7 +29,7 @@ Y como herramientas adicionales:
 
 Como requisito indispensble se requiere tener instalado **DOCKER** o **PODMAN** y el complemento ***DOCKER COMPOSE***.
 
-#### Archivo ***docker-compose.yml***
+#### docker-compose.yml
 
 - Tiene la configuración necesaria para arrancar los servicios en un **EQUIPO LOCAL**.
 - Con algunos cambios puede llevarse a un ***VPS*** y trabajar con el protocolo ***HTTPS*** -ver directorio VPS_config-.
@@ -36,7 +39,7 @@ Como requisito indispensble se requiere tener instalado **DOCKER** o **PODMAN** 
 - El volumen y la red virtual se crean automaticamente al arrancar un servicio con docker-compose
 - En algunos servicios esta definido el usuario de acceso y su contraseña.
 
-#### Imagenes de los contenedores
+#### Imagenes
 
 Así se descargan:
 
@@ -58,7 +61,7 @@ docker build -t python3_flask2 -f dockerfile
 docker build -t python3_fastapi1 -f dockerfile
 ```
 
-#### Arranque y administración de los contenedores
+#### Arranque
 
 Recomiendo arrancar los servicios uno a uno en el siguiente orden:
 
