@@ -3,9 +3,7 @@
 ## INDICE
 - [Herramientas](#herramientas)
 - [Instalación](#instalación)
-  - [Archivo docker-compose-yml](#docker-compose.yml)
-  - [Imagenes](#imagenes)
-  - [Arranque y administración de contenedores](#arranque)
+- [Administración de contenedores](#administracion-de-contenedores)
 - [Uso](#uso)
 - [Documentación](#documentación)
 - [Estructura del Proyecto](#estructura-del-proyecto)   
