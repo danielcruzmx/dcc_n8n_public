@@ -14,7 +14,7 @@ Esta herramienta genera dos contenedores para su funcionamiento:
 
 En resumen, el modelo es ideal para entornos Docker donde se desea HTTPS sencillo y automatizado.
 
-En DigitalOcean tengo esta configuración y en su oportunidad lo documente
+En DigitalOcean uso una configuración similar, en su oportunidad lo documente
 
 https://dancruzmx.medium.com/configuraci%C3%B3n-de-un-servidor-proxy-nginx-en-centos7-y-contenedores-docker-180b0440a6b7
 
@@ -53,7 +53,7 @@ networks:
     name: podman
 ```
 
-El servidor API REST esta en la dirección https://api.midominio.com/docs
+El servidor API REST queda en la dirección https://api.midominio.com/docs
 
 Es importante mencionar que la herramienta ACME Companion requiere de un dominio válido para emitir certificados. Esto se debe a que el protocolo ACME valida la propiedad del dominio antes de emitir un certificado. ***Sin un dominio registrado y accesible, el proceso de verificación no puede completarse***. Debes poseer un dominio y tener control sobre su configuración DNS o servidor web.
 

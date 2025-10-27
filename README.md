@@ -1,3 +1,10 @@
+## Índice
+- [Título del Proyecto](#título-del-proyecto)
+- [Instalación](#instalación)
+- [Uso](#uso)
+- [Documentación](#documentación)
+- [Estructura del Proyecto](#estructura-del-proyecto)   
+
 ## Python y automatizaciones N8N con contenedores
 
 ### RESUMEN
@@ -25,7 +32,7 @@ Como requisito indispensble se requiere tener instalado **DOCKER** o **PODMAN** 
 - Con algunos cambios puede llevarse a un ***VPS*** y trabajar con el protocolo ***HTTPS*** -ver directorio VPS_config-.
 - Define el volumen ***postgres-vol*** para persistir la base de datos.
 - Define la red virtual ***vpn8n*** con el rango de direcciones 10.13.0.0/16
-- Cada contenedor tiene asignada su dirección IP dentro del rango anterior.
+- Cada contenedor tiene asignada una dirección IP dentro del rango anterior.
 - El volumen y la red virtual se crean automaticamente al arrancar un servicio con docker-compose
 - En algunos servicios esta definido el usuario de acceso y su contraseña.
 

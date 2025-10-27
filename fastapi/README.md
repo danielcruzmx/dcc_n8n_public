@@ -25,9 +25,9 @@ Simplemente hay que seguir los pasos:
 
 ### CACHE
 
-Cuando se llama a un servicio por primera vez la API ejecuta la sentencia SQL para recuperar los datos desde PostgreSql y los almacena en la instancia de ***REDIS*** con una llave de acceso. Para llamados posteriores la API recupera los datos de la instancia de ***REDIS***.
+Cuando se llama a un servicio por primera vez la API ejecuta la sentencia SQL para recuperar los datos y los almacena en la instancia de ***REDIS*** con una llave de acceso. Para llamados posteriores la API recupera los datos de la instancia de ***REDIS***.
 
-Es importante señalar que la definicion de la llave de acceso en ***REDIS*** tiene tiempo de vencimiento en segundos, esto significa que en algun momento la recuperación de los datos se hará nuevamente de la base de datos.
+Es importante señalar que la definicion de la llave de acceso en ***REDIS*** tiene tiempo de vencimiento, esto significa que en algun momento la recuperación de los datos se hará nuevamente de la base de datos.
 
 En teoria la recuperación de datos debe ser mas rapida del cache ***REDIS***. 
 

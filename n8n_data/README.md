@@ -8,7 +8,7 @@ Cuando se entra por primera vez, aperece un formulario donde se solicita una dir
 
 ### ACTIVACION DE LA LICENCIA
 
-En el ambiente de trabajo de ***N8N***, abajo a la izquierda, donde aparece el ***nombre del usuario*** está el menu ***...***, tome la opción ***Settings*** y posteriormente presione el botón ***Enter activation key***, digite la licencia que llego a su correo y acepte para completar el proceso de configuración.
+En el ambiente de trabajo de ***N8N***, abajo a la izquierda, donde aparece el ***nombre del usuario*** está el menu de tres puntos***...***, tome la opción ***Settings*** y posteriormente presione el botón ***Enter activation key***, digite la licencia que llego a su correo y acepte para completar el proceso de configuración.
 
 ### SOBRE N8N
 
@@ -24,7 +24,7 @@ Mis soluciones se basan en scripts de Python y no soy hábil para desarrollar in
 
 Recibo mensajes o correos con datos adjuntos que desencadenan la ejecución de una solución y dan la respuesta, ***por supuesto en modo desatendido***.
 
-Inclusive ***N8N*** me brinda la posibilidad de generar formularios ***dinámicos*** para el ingreso de datos. El nodo ***Form*** tiene la opción de definir sus elementos con código ***JSON***, esto abre la posibilidad de construir formularios basados en datos previos.
+Inclusive ***N8N*** me brinda la posibilidad de generar formularios ***dinámicos*** para el ingreso de datos. El nodo ***Form*** tiene la opción de definir sus elementos con código ***JSON***, esto hace posible la construcción de formularios basados en datos previos.
 
 ### DETERMINISMO E IA
 
