@@ -27,7 +27,7 @@ Y como herramientas adicionales:
 
 Como requisito indispensble se requiere tener instalado **DOCKER** o **PODMAN** y el complemento ***DOCKER COMPOSE***.
 
-#### docker-compose.yml
+#### Archivo docker-compose.yml
 
 - Tiene la configuración necesaria para arrancar los servicios en un **EQUIPO LOCAL**.
 - Con algunos cambios puede llevarse a un ***VPS*** y trabajar con el protocolo ***HTTPS*** -ver directorio VPS_config-.
@@ -37,7 +37,7 @@ Como requisito indispensble se requiere tener instalado **DOCKER** o **PODMAN** 
 - El volumen y la red virtual se crean automaticamente al arrancar un servicio con docker-compose
 - En algunos servicios esta definido el usuario de acceso y su contraseña.
 
-#### Imagenes
+#### Imagenes de los contenedores
 
 Así se descargan:
 
@@ -59,7 +59,7 @@ docker build -t python3_flask2 -f dockerfile
 docker build -t python3_fastapi1 -f dockerfile
 ```
 
-#### Arranque
+### ADMINISTRACIÓN DE CONTENEDORES
 
 Recomiendo arrancar los servicios uno a uno en el siguiente orden:
 
