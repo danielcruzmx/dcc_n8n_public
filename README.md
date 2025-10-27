@@ -151,7 +151,7 @@ Los archivos ***tipo_tabla.csv*** y ***tabla_ispt.csv*** tienen los datos necesa
 
 Clic del boton derecho del raton sobre el nombre de cada tabla nos da la opcion de **Import/Export Data**. 
 
-Seleccione ***Importar*** y a la derecha de ***Nombre de archivo*** de clic sobre el icono que sirve para administrar el directorio, ubique el menu de tres puntos ***...***, tome la opcion ***Upload*** que abre la ventana donde podra arrastrar los archivos de datos **.csv** y completar la tarea de importación.
+Seleccione ***Importar*** y a la derecha de ***Nombre de archivo*** de clic sobre el icono que sirve para administrar el directorio, ubique el menu de tres puntos ***...*** y tome la opcion ***Upload*** que abre la ventana donde podra arrastrar los archivos de datos **.csv** y completar la tarea de importación.
 
 ### MODELO DE DATOS NORTHWIND
 
