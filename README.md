@@ -275,12 +275,12 @@ Es una técnica de IA que recupera información de fuentes externas y la utiliza
 
 Funcionamiento:
 
-1. ***Acopio de datos***, documentos o bases de datoa.
-2. ***Segmentación de datos***, los datos se dividen en segmentos mas pequeños pra facilitar su administración y procesamiento.
+1. ***Acopio de datos***, documentos o bases de datos.
+2. ***Segmentación de datos***, los datos se dividen en segmentos mas pequeños para facilitar su administración y procesamiento.
 3. ***Incrustación de documentos***, los fragmentos se transforman en incrustaciones o representaciones vectoriales. Son valores númericos que representan un valor semantico del contenido.
 4. ***Gestión de consultas***, las consultas se convierten en representaciones vectoriales utilizando el mismo modelo de incrustación.
 5. ***Recuperacion de la información***, el sistema compara la incrustación de la consulta con las incrustaciones de los documentos para identificar y recuperar los fragmentos de datos mas relevantes.
-6. ***Generación de respuestas***, los fragmentos de texto seleccionados y la consulta original se introducen en un LLM que genera una respuesta coherente y contextualizada.
+6. ***Generación de respuestas***, los fragmentos de texto seleccionados y la consulta original se introducen en un ***LLM*** que genera una respuesta coherente y contextualizada.
 7. ***Actualización constante***, para mantener la relevancia y presición, los datos externos se deben acualizar constantemente.
 
 Donde usar RAG:
