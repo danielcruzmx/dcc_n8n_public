@@ -3,17 +3,17 @@
 ## INDICE
 - [Herramientas](#herramientas)
 - [Instalación](#instalación)
-- [Arranque y dministración de contenedores](#arranque-y-administración-de-contenedores)
+- [Arranque y administración de contenedores](#arranque-y-administración-de-contenedores)
 - [Conexión a base de datos PostgreSql](#conexión-a-base-de-datos-postgresql)
 - [Creación de objetos](#creación-de-objetos)
 - [Modelo de datos Northwind](#modelo-de-datos-northwind)
 - [Documentación de la API REST de Python](#documentación-de-la-api-rest-de-python)  
 - [Cache con Redis](#cache-con-redis) 
 - [Inicio de N8N y licencia](#inicio-de-n8n-y-licencia)
-- [Inicio y configuración de Qdrant](#inicio-y-configuracion-de-qdrant)
+- [Inicio y configuración de Qdrant](#inicio-y-configuración-de-qdrant)
 - [Bases de datos vectoriales e IA](#bases-de-datos-vectoriales-e-IA)
 - [RAG Generación aumentada por recuperación](#rag-generación-aumentada-por-recuperación)
-- [Configuración para VPN](#configuración-para-vpn)
+- [Configuración para VPS](#configuración-para-vps)
 - [Descripción de plantillas](#descripción-de-plantillas)
 
 ### HERRAMIENTAS
@@ -38,7 +38,7 @@ Como requisito indispensble se requiere tener instalado **DOCKER** o **PODMAN** 
 #### Archivo docker-compose.yml
 
 - Tiene la configuración necesaria para arrancar los servicios en un **EQUIPO LOCAL**.
-- Con algunos cambios puede llevarse a un ***VPS*** y trabajar con el protocolo ***HTTPS*** -ver directorio VPS_config-.
+- Con algunos cambios puede llevarse a un ***VPS*** y trabajar con el protocolo ***HTTPS*** -ver configuración para VPS-.
 - Define el volumen ***postgres-vol*** para persistir la base de datos.
 - Define la red virtual ***vpn8n*** con el rango de direcciones 10.13.0.0/16
 - Cada contenedor tiene asignada una dirección IP dentro del rango anterior.
@@ -129,8 +129,7 @@ docker rm Container_ID
 
 ### CONEXIÓN A BASE DE DATOS POSTGRESQL
 
-Para administrar la base de datos con PgAdmin entre a la dirección ***http://localhost:8015***, 
-el correo y contraseña de acceso estan definidos en el archivo ***docker-compose.yml***.
+En la dirección ***http://localhost:8015*** esta PgAdmin, el administrador de la base de datos, para acceder se requiere el correo y contraseña definidos en el archivo ***docker-compose.yml***.
 
 En el administrador configure la conexión para PostgreSql, use el icono ***Agregar un Nuevo Servidor***, el nombre de la conexión puede ser por ejemplo ***local***. 
 
@@ -232,7 +231,7 @@ Para los agentes de IA, las bases de datos vectoriales son esenciales para imple
 
 Lo anterior permite a los agentes proporcionar respuestas precisas y verificables, basadas en fuentes externas, evitando así las alucinaciones propias de los modelos de lenguaje grandes (***LLMs***), que pueden generar información falsa o irrelevante.
 
-### RAG GENERACIÓN AUMENTADA POR RECUPERACION
+### RAG GENERACIÓN AUMENTADA POR RECUPERACIÓN
 
 Es una técnica de IA que recupera información de fuentes externas y la utiliza como contexto para genera respuestas. Es útil en situaciones donde la actualidad y el contexto son cruciales para generar respuestas precisas y relevantes.
 
@@ -258,7 +257,7 @@ Retos:
 - ***Escalabilidad y rendimiento***, La generación de incrustaciones y recuperación de datos en tiempo real son operaciones intensivas en computación.
 - ***Calidad y actualización de los datos***, requiere la actualización constante de los documentos par amantener la pecisión del sistema.
 
-### CONFIGURACIÓN PARA VPN
+### CONFIGURACIÓN PARA VPS
 
 Mi ***VPS*** esta en Hostinger, uso ***acme-companion*** que junto con ***nginx-proxy*** ayudan a automatizar completamente la obtención y renovación de certificados ***HTTPS*** de Let's Encrypt. 
 
