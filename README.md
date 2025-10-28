@@ -130,11 +130,11 @@ docker rm Container_ID
 
 ### CONEXIÓN A BASE DE DATOS POSTGRESQL
 
-En la dirección ***http://localhost:8015*** esta PgAdmin, el administrador de la base de datos. Para acceder se requiere el correo y contraseña definidos en el archivo ***docker-compose.yml***.
+En la dirección ***http://localhost:8015*** esta el administrador de la base de datos ***PgAdmin***. Para acceder se requiere el correo y contraseña definidos en el archivo ***docker-compose.yml***.
 
-En el administrador configure la conexión para PostgreSql, use el icono ***Agregar un Nuevo Servidor***, el nombre de la conexión puede ser por ejemplo ***local***. 
+En PgAdmin configure la conexión para PostgreSql, use el icono ***Agregar un Nuevo Servidor***, el nombre de la conexión puede ser por ejemplo ***local***. 
 
-Ubique la ceja ***Conexión*** y especifique la ***Dirección del servidor***, debe ser la IP asignada al contenedor de PostgreSql ***10.13.0.2***, el usuario por default es ***postgres*** al igual que la base de datos. La contraseña esta definida en el archivo ***docker-compose.yml***
+Ubique la ceja ***Conexión*** y especifique la ***Dirección del servidor***, debe ser la IP asignada al contenedor de PostgreSql ***10.13.0.2***. El usuario por default es ***postgres*** al igual que la base de datos. La contraseña esta definida en el archivo ***docker-compose.yml***
 
 A la izquierda del administrador siempre vera el ***arbol de objetos*** de la base de datos, clic del boton derecho del raton sobre un objeto permite administrar sus elementos.
 
@@ -144,15 +144,15 @@ Ubique el objeto ***Secuencias*** dentro de ***Esquemas*** y con la ayuda del bo
 
 Abra con un editor el archivo ***crear_tablas.sql***, seleccione y copie al portapapeles su contenido.
 
-En la parte superior de PgAdmin esta el menu ***Herramientas***, tome la opción ***Herramienta de Consulta***, en el área de edición pegue y ejecute (F5) el contenido de ***crear_tablas.sql***
+En la parte superior de PgAdmin esta el menu ***Herramientas***, tome la opción ***Herramienta de Consulta*** y en el área de edición pegue y ejecute con ***F5*** el contenido de ***crear_tablas.sql***
 
 Los objetos creados aparecen en el arbol de la izquierda dentro de ***Esquemas/Tablas***.
 
 Los archivos ***tipo_tabla.csv*** y ***tabla_ispt.csv*** tienen los datos necesarios para poblar las tablas. 
 
-Clic del boton derecho del raton sobre el nombre de cada tabla nos da la opcion de **Import/Export Data**. 
+Clic del boton derecho del raton sobre el nombre de cada tabla nos da la opcion de ***Import/Export Data***. 
 
-Seleccione ***Importar*** y a la derecha de ***Nombre de archivo*** de clic sobre el icono que sirve para administrar el directorio, ubique el menu de tres puntos ***...*** y tome la opcion ***Upload*** que abre la ventana donde podra arrastrar los archivos de datos **.csv** y completar la tarea de importación.
+Seleccione ***Importar*** y a la derecha de ***Nombre de archivo*** de clic sobre el icono que sirve para administrar el directorio, ubique el menu de tres puntos ***...*** y tome la opcion ***Upload*** que abre la ventana donde podra arrastrar los archivos de datos ***.csv*** y completar la tarea de importación.
 
 ### MODELO DE DATOS NORTHWIND
 
@@ -162,7 +162,7 @@ Botón derecho sobre el objeto ***Bases de Datos*** le permite creer la base de 
 
 Posteriormente abra una ***Herramienta de Consulta***, pegue y ejecute el script de creación de las tablas. El script tambien inserta datos para que de inmediato puedas ejecutar sentencias SQL.
 
-No sabes SQL? 
+***No sabes SQL?***
 
 https://dancruzmx.medium.com/aprende-sql-1ra-parte-conceptos-de-base-de-datos-63019da3124f
 
@@ -179,12 +179,12 @@ El analisis requerira de consultas SQL y un agente de IA para explorar los datos
 
 En la dirección ***http://localhost:4557/docs*** se muestra la documentación de los servicios API REST programados, clic del raton sobre una ruta especifica despliega mayor información.
 
-- Parametros requeridos por el servicio, nombre y tipo.
-- Botones para la ejecución del servicio ***Try it out*** y posteriormente ***Execute***.
-- Area de respuesta, codigo, tipo de respuesta y resultado.
+- Parametros requeridos por el servicio (nombre y tipo).
+- Botones para la ejecución del servicio, ***Try it out*** y posteriormente ***Execute***.
+- Area de respuesta, codigo http, tipo de respuesta y resultado.
 - Sentencia ***CURL*** de llamado.
 
-Es importante estar atento a la caja de texto ***CURL***, esas lineas se usan para configurar nodos ***HTTP Request*** en N8N.
+Es importante estar atento a la caja de texto ***CURL***, esas lineas se usan para configurar nodos ***HTTP Request*** en ***N8N***.
 
 #### Creación de nuevos servicios
 
