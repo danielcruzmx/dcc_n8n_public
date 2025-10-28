@@ -200,7 +200,7 @@ Simplemente hay que seguir los pasos:
 
 ### CACHE CON REDIS
 
-Cuando se llama a un servicio ***API REST*** por primera vez, se ejecuta la sentencia SQL para recuperar los datos que se almacenan en la instancia de ***REDIS*** con una llave de acceso. Para llamados posteriores la API recupera los datos de la instancia de ***REDIS***.
+En la primera llamada a la ***API REST***, se ejecuta la sentencia SQL para obtener los datos. Estos datos se almacenan en la instancia de ***REDIS*** bajo una llave de acceso. En llamadas posteriores, la API recupera la información directamente desde ***REDIS***.
 
 Es importante señalar que la definicion de la llave de acceso en ***REDIS*** tiene tiempo de vencimiento, esto significa que en algun momento la recuperación de los datos se hará nuevamente de la base de datos.
 
