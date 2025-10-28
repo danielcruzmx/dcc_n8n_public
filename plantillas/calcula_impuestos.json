@@ -1,0 +1,88 @@
+{
+  "name": "calcula_impuestos",
+  "nodes": [
+    {
+      "parameters": {
+        "formTitle": "Upload File",
+        "formDescription": "Subir archivo de datos para calculo de impuestos",
+        "formFields": {
+          "values": [
+            {
+              "fieldLabel": "Archivo",
+              "fieldType": "file",
+              "multipleFiles": false,
+              "acceptFileTypes": "*.csv",
+              "requiredField": true
+            }
+          ]
+        },
+        "options": {}
+      },
+      "type": "n8n-nodes-base.formTrigger",
+      "typeVersion": 2.2,
+      "position": [
+        -880,
+        -240
+      ],
+      "id": "b684a430-b8c6-42a6-a463-52acf1cd3756",
+      "name": "On form submission",
+      "webhookId": "f10beaba-9185-4c74-bc0f-60b43d9167fe"
+    },
+    {
+      "parameters": {
+        "method": "POST",
+        "url": "http://10.13.0.7:5001/upload",
+        "sendBody": true,
+        "contentType": "multipart-form-data",
+        "bodyParameters": {
+          "parameters": [
+            {
+              "parameterType": "formBinaryData",
+              "name": "archivo_csv",
+              "inputDataFieldName": "Archivo"
+            }
+          ]
+        },
+        "options": {
+          "response": {
+            "response": {
+              "responseFormat": "file"
+            }
+          }
+        }
+      },
+      "type": "n8n-nodes-base.httpRequest",
+      "typeVersion": 4.2,
+      "position": [
+        -656,
+        -240
+      ],
+      "id": "447c6b07-cadd-427c-ad08-b36954adbca0",
+      "name": "HTTP Request"
+    }
+  ],
+  "pinData": {},
+  "connections": {
+    "On form submission": {
+      "main": [
+        [
+          {
+            "node": "HTTP Request",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    }
+  },
+  "active": false,
+  "settings": {
+    "executionOrder": "v1"
+  },
+  "versionId": "b61c4fbc-5435-4206-8d9d-dcbdf7e8571b",
+  "meta": {
+    "instanceId": "66037d4eb617fb26a2fd45902042e170cf5a5f2ddf737127b2240a034f738436"
+  },
+  "id": "8bvOc6WUBiuC5wNL",
+  "tags": []
+}

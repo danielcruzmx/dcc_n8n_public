@@ -1,4 +1,5 @@
 import requests
+import pandas   as pd
 
 def obt_data(msg, ruta, api):
     response = None
@@ -17,9 +18,9 @@ def carga_tabla_ispt(api):
         return None
 
 def ispt(tabla_ispt, monto):
-    if not self.tabla_ispt.empty:
-        ran = tabla_ispt[(tabla_ispt.limite_inferior <= monto) & _
-                         (tabla_ispt.limite_superior >= monto) & _
+    if not tabla_ispt.empty:
+        ran = tabla_ispt[(tabla_ispt.limite_inferior <= monto) & 
+                         (tabla_ispt.limite_superior >= monto) & 
                          (tabla_ispt.tipo_tabla == '80')]
         val = ran.to_dict('records')
         res = ( monto  - val[0]['limite_inferior']) * (val[0]['excedente'] /  100.0) + val[0]['cuota_fija'] 

@@ -8,6 +8,7 @@
 - [Modelo de datos Northwind](#modelo-de-datos-northwind)
 - [Documentación de la API REST de Python](#documentación-de-la-api-rest-de-python)  
 - [Cache con Redis](#cache-con-redis) 
+- [Web Server Flask](#web-server-flask)
 - [Inicio de N8N y licencia](#inicio-de-n8n-y-licencia)
 - [Determinismo e IA](#determinismo-e-ia)
 - [Inicio y configuración de Qdrant](#inicio-y-configuración-de-qdrant)
@@ -157,13 +158,22 @@ Seleccione ***Importar*** y a la derecha de ***Nombre de archivo*** de clic sobr
 
 En el directorio ***database*** se encuentra la imagen ***.png*** y el script ***.sql*** del modelo de datos ***northwind***, instale con la ayuda del arbol de objetos.
 
- Botón derecho sobre el objeto ***Bases de Datos*** le permite creer la base de datos ***northwind***.
+Botón derecho sobre el objeto ***Bases de Datos*** le permite creer la base de datos ***northwind***.
 
- Posteriormente abra una ***Herramienta de Consulta***, pegue y ejecute el script de creación de las tablas. El script tambien inserta datos para que de inmediato pueda ejecutar sentencias SQL.
+Posteriormente abra una ***Herramienta de Consulta***, pegue y ejecute el script de creación de las tablas. El script tambien inserta datos para que de inmediato puedas ejecutar sentencias SQL.
 
 No sabes SQL? 
 
 https://dancruzmx.medium.com/aprende-sql-1ra-parte-conceptos-de-base-de-datos-63019da3124f
+
+Mi intención es hacer un Workflow con el analisis de la información de esta base de datos.
+
+- Los clientes mas valiosos
+- Los productos ma vendidos
+- Los empleados con mejor desempeño
+- Los patrones de envio y compra
+
+El analisis requerira de consultas SQL y un agente de IA para explorar los datos, destacar patrones, brindar información valiosa y conclusiones utiles.
 
 ### DOCUMENTACIÓN DE LA API REST DE PYTHON
 
@@ -198,6 +208,36 @@ En teoria la recuperación de datos debe ser mas rapida del cache ***REDIS***.
 
 Se recomienda usar este mecanismo en tablas que no cambian sus datos constantemente, los catálogos por ejemplo.
 
+### WEB SERVER FLASK
+
+El ***Web Server*** esta programado para realizar sencillas tareas de calculo sobre los datos de un archivo con extención ***.csv***
+
+El servicio de carga del archivo esta en la dirección http://10.13.0.7:5001/upload  
+
+El archivo de prueba tiene las siguientes caracteristicas:
+
+```
+empleado,sueldo_mensual,impuesto
+Juan Ramirez,15000,0
+Maria Fernandez,20000,0
+Jose Martinez,17000,0
+Antonio Gonzalez,14500,0
+Luisa Rodriguez,18900,0
+Margarita Chavez,13000,0
+```
+
+El ***Web Server*** simplemente calcula en cada caso el impuesto mensual y regresa el archivo. 
+
+La capacidad de procesamiento del servidor depende de la cantidad de datos del archivo.
+
+Si lo que se desea es el procesamiento de grandes cantidades de información será necesario utilizar bibliotecas Python externas al framework ***Flask***.
+
+#### Python Celery
+
+Es una herramienta poderosa para ejecutar procesos desatendidos (background tasks) en aplicaciones Python, especialmente en entornos Web como Django o Flask. Permite delegar tareas intensivas o de larga duración a workers en segundo plano, liberando el hilo principal de la aplicación y evitando bloqueos o timeouts.
+
+La imagen construida para ***Flask*** ya considera esta biblioteca y en su oportunidad documentare como se puede usar.
+
 ### INICIO DE N8N Y LICENCIA
 
 El servidor ***N8N*** esta en la dirección ***http://localhost:5678***
@@ -231,7 +271,7 @@ El determinismo en computación se refiere a que, dadas unas mismas entradas y c
 Muchas soluciones de IA son no deterministas, esto significa que ante la misma entrada pueden producir respuestas ligeramente diferentes en distintas ejecuciones. Aunque su naturaleza es probabilistica algunas aplicaciones de IA pueden ser deterministas, especialmente cuando:
 
 - Se usan algoritmos clásicos (reglas lógicas).
-- Se combinan modelos de IA con sistemas deterministas (recuperación de datos exactos, generación de consultas SQL o llamado a servicios API REST).
+- Se combinan modelos de IA con sistemas deterministas (recuperación de datos exactos, generación de consultas SQL o llamado a servicios ***API REST***).
 
 ***N8N*** es una herramienta determinista por naturaleza (mismas entradas -> mismas salidas), entonces en ***N8N*** debes delegar a los agentes de IA tareas que requieran razonamiento, comprensión del lenguaje o toma de decisiones. 
 
@@ -319,7 +359,7 @@ Cada servicio/ruta muestra el código de llamado via ***CURL***, ese código pue
 
 #### - dropdown_dinamico.json
 
-El nodo ***Form*** de ***N8N*** permite definir con codigo JSON sus elementos, en este Workflow se usa esa modalidad.
+El nodo ***Form*** de ***N8N*** permite definir con codigo ***JSON*** sus elementos, en este Workflow se usa esa modalidad.
 
 ```
 [
@@ -346,14 +386,14 @@ La solución consiste en:
 
 1. Identificar los ID de los calendarios de los equipos
 2. Elaborar una lista en Google Sheet con los nombres de los equipos y los ID de sus calendarios
-3. Crear un nodo ***Google Sheet*** que lea los registros de la lista
+3. Crear un nodo ***Google Sheet*** que recupere los registros de la lista
 4. Crear un nodo ***Set*** para establecer las fechas de inicio y fin de la temporada
 5. Crear un nodo ***Calendar*** que recupere los eventos de los equipos en las fechas determinadas
 6. Crear un nodo ***Remove Duplicates*** para eliminar eventos duplicados
 7. Crear un nodo ***Set*** que asigne a cada evento un ID propio
 7. Crear un nodo ***Calendar*** que genere mis eventos (partidos) con los datos previos
 
-Una vez generado mi propio calendario de juegos, la intención es construir otro Workflow que generare cada semana la lista de encuentros y la envie a mis contactos para que hagan sus pronósticos.
+Una vez generado mi propio calendario de juegos, la intención es construir un Workflow que generare cada semana la lista de encuentros y la envie a mis contactos para que hagan sus pronósticos. Otro Workflow estaria a la espera de los pronósticos para almacenarlos y llevar el record.
 
 #### - carga_leyes.json 
 
@@ -382,10 +422,7 @@ Usa la información almacenada con el Workflow ***carga-leyes.json***
 
 #### - borra_coleccion.JSON
 
-Este Workflow de unico nodo sirve para borrar colecciones de la base de datos vectorial. 
-
-Si por alguna razón la ley de propiedad en condominio cambia hay que borrar su contenido de la base de datos y volverlo a cargar (Punto 7 del funcionamiento de un sistema RAG).   
-
+Este Workflow de unico nodo sirve para borrar colecciones de la base de datos vectorial. Si por alguna razón la ley de propiedad en condominio cambia hay que borrar su contenido de la base de datos y volverlo a cargar (Punto 7 del funcionamiento de un sistema RAG).   
 No hay que olvidar que la referencia a la base de datos vectorial es:
 
 http://10.13.0.6:6333
@@ -400,9 +437,9 @@ Esta herramienta genera dos contenedores para su funcionamiento:
 
 1. ***nginx-proxy*** que actúa como un proxy inverso que redirige el tráfico entrante (puertos 80 y 443) a los contenedores de aplicaciones según el dominio (RED VIRTUAL DE DOCKER). Se encarga de enrutar las solicitudes ***HTTP/HTTPS*** a los servicios correctos en la red Docker.
 
-2. ***acme-companion*** que se encarga de obtener y renovar automáticamente certificados ***SSL/TLS*** de Let's Encrypt para los dominios configurados. Escucha los eventos de Docker y cuando detecta un contenedor con la variable ***LETSENCRYPT_HOST***, solicita un certificado mediante el protocolo ACME.
+2. ***acme-companion*** que se encarga de obtener y renovar automáticamente certificados ***SSL/TLS*** de Let's Encrypt para los dominios configurados. Escucha los eventos de Docker y cuando detecta un contenedor con la variable ***LETSENCRYPT_HOST***, solicita un certificado mediante el protocolo ***ACME***.
 
-En resumen, el modelo es ideal para entornos Docker donde se desea HTTPS sencillo y automatizado.
+En resumen, el modelo es ideal para entornos Docker donde se desea ***HTTPS*** sencillo y automatizado.
 
 En DigitalOcean uso una configuración similar, en su oportunidad lo documente
 
@@ -445,6 +482,8 @@ networks:
 
 El servidor API REST queda en la dirección https://api.midominio.com/docs
 
-Es importante mencionar que la herramienta ACME Companion requiere de un dominio válido para emitir certificados. Esto se debe a que el protocolo ACME valida la propiedad del dominio antes de emitir un certificado. ***Sin un dominio registrado y accesible, el proceso de verificación no puede completarse***. Debes poseer un dominio y tener control sobre su configuración DNS o servidor web.
+Es importante mencionar que la herramienta ***ACME Companion*** requiere de un dominio válido para emitir certificados. Esto se debe a que el protocolo ***ACME*** valida la propiedad del dominio antes de emitir un certificado. ***Sin un dominio registrado y accesible, el proceso de verificación no puede completarse***. Debes poseer un dominio y tener control sobre su configuración DNS o servidor web.
 
 No todos los contenedores deben ser configurados de esta manera, solo se deben configurar los servicios que deseas compartir o acceder en la nube. Por supuesto que el servidor de ***N8N*** debe ser uno de ellos.
+
+

@@ -81,6 +81,7 @@ services:
         ports:
             - "0.0.0.0:5001:5001"
         working_dir: /home  
+        entrypoint: /bin/bash -c 'gunicorn --bind 0.0.0.0:5001 -w 2 app:app --log-file - '
         tty: true
         networks:
           vpn8n:

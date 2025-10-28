@@ -13,7 +13,12 @@ app.config.from_object(__name__)
 
 def calcula_ispt(dataF, api):
     dfi = carga_tabla_ispt(api)
-    dataF['impuesto'] = 0.0
+    dataF['sueldo_mensual']   = dataF['sueldo_mensual'].astype(float) 
+    dataF['impuesto'] = dataF['impuesto'].astype(float) 
+    for i in dataF.index:
+        sueldo   = dataF.loc[i,'sueldo_mensual'] 
+        impuesto = ispt(dfi, sueldo)
+        dataF.loc[i,'impuesto'] = round(impuesto,2)
     dfr = dataF
     return dfr
 
