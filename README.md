@@ -158,7 +158,7 @@ Seleccione ***Importar*** y a la derecha de ***Nombre de archivo*** de clic sobr
 
 En el directorio ***database*** se encuentra la imagen ***.png*** y el script ***.sql*** del modelo de datos ***northwind***, instale con la ayuda del arbol de objetos.
 
-Botón derecho sobre el objeto ***Bases de Datos*** le permite creer la base de datos ***northwind***.
+Botón derecho sobre el objeto ***Bases de Datos*** le permite crear la base de datos ***northwind***.
 
 Posteriormente abra una ***Herramienta de Consulta***, pegue y ejecute el script de creación de las tablas. El script tambien inserta datos para que de inmediato puedas ejecutar sentencias SQL.
 
@@ -177,7 +177,7 @@ El analisis requerira de consultas SQL y un agente de IA para explorar los datos
 
 ### DOCUMENTACIÓN DE LA API REST DE PYTHON
 
-En la dirección ***http://localhost:4557/docs*** se muestra la documentación de los servicios API REST programados, clic del raton sobre una ruta especifica despliega mayor información.
+En la dirección ***http://localhost:4557/docs*** se muestra la documentación de los servicios ***API REST*** programados, clic del raton sobre una ruta especifica despliega mayor información.
 
 - Parametros requeridos por el servicio (nombre y tipo).
 - Botones para la ejecución del servicio, ***Try it out*** y posteriormente ***Execute***.
@@ -200,7 +200,7 @@ Simplemente hay que seguir los pasos:
 
 ### CACHE CON REDIS
 
-Cuando se llama a un servicio API REST por primera vez, se ejecuta la sentencia SQL para recuperar los datos y se almacenan en la instancia de ***REDIS*** con una llave de acceso. Para llamados posteriores la API recupera los datos de la instancia de ***REDIS***.
+Cuando se llama a un servicio ***API REST*** por primera vez, se ejecuta la sentencia SQL para recuperar los datos que se almacenan en la instancia de ***REDIS*** con una llave de acceso. Para llamados posteriores la API recupera los datos de la instancia de ***REDIS***.
 
 Es importante señalar que la definicion de la llave de acceso en ***REDIS*** tiene tiempo de vencimiento, esto significa que en algun momento la recuperación de los datos se hará nuevamente de la base de datos.
 
