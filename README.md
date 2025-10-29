@@ -1,5 +1,7 @@
 ## Python y automatizaciones N8N con contenedores
 
+![Arquitectura](arquitectura.png)
+
 - [Herramientas](#herramientas)
 - [Instalación](#instalación)
 - [Arranque y administración de contenedores](#arranque-y-administración-de-contenedores)
