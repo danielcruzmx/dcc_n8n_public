@@ -15,7 +15,6 @@ n8n_data/nodes/
 n8n_data/ssh/
 n8n_data/config
 
-qdrant/*
 __pycache__/
 staticfiles
 media

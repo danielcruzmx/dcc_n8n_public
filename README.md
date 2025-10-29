@@ -41,7 +41,7 @@ Como requisito indispensble se requiere tener instalado **DOCKER** o **PODMAN** 
 #### Archivo docker-compose.yml
 
 - Tiene la configuración necesaria para arrancar los servicios en un **EQUIPO LOCAL**.
-- Con algunos cambios puede llevarse a un ***VPS*** y trabajar con el protocolo ***HTTPS*** -ver configuración para VPS-.
+- Con algunos cambios puede llevarse a un ***VPS*** y trabajar con el protocolo ***HTTPS*** -ver Configuración para VPS-.
 - Define el volumen ***postgres-vol*** para persistir la base de datos.
 - Define la red virtual ***vpn8n*** con el rango de direcciones 10.13.0.0/16
 - Cada contenedor tiene asignada una dirección IP dentro del rango anterior.
@@ -130,11 +130,17 @@ Para destruir un contenedor use:
 docker rm Container_ID
 ```
 
+#### NOTA IMPORTANTE
+
+**La comunicación entre los contenedores/servidores se da a través de las direcciones IP asignadas en la RED VIRTUAL DE DOCKER**. 
+
+Cuando usamos el navegador para acceder a los servidores la dirección es ***localhost*** debido a que ***Docker*** establece un puente entre sus redes virtuales y la maquina huesped, el puerto es lo que hace la diferencia entre las aplicaciones.
+
 ### CONEXIÓN A BASE DE DATOS POSTGRESQL
 
 En la dirección ***http://localhost:8015*** esta el administrador de la base de datos ***PgAdmin***. Para acceder se requiere el correo y contraseña definidos en el archivo ***docker-compose.yml***.
 
-En PgAdmin configure la conexión para PostgreSql, use el icono ***Agregar un Nuevo Servidor***, el nombre de la conexión puede ser por ejemplo ***local***. 
+En ***PgAdmin*** configure la conexión para PostgreSql, use el icono ***Agregar un Nuevo Servidor***, el nombre de la conexión puede ser por ejemplo ***local***. 
 
 Ubique la ceja ***Conexión*** y especifique la ***Dirección del servidor***, debe ser la IP asignada al contenedor de PostgreSql ***10.13.0.2***. El usuario por default es ***postgres*** al igual que la base de datos. La contraseña esta definida en el archivo ***docker-compose.yml***
 
@@ -158,7 +164,7 @@ Seleccione ***Importar*** y a la derecha de ***Nombre de archivo*** de clic sobr
 
 ### MODELO DE DATOS NORTHWIND
 
-En el directorio ***database*** se encuentra la imagen ***.png*** y el script ***.sql*** del modelo de datos ***northwind***, instale con la ayuda del arbol de objetos.
+En el directorio ***database*** se encuentra el modelo de entidad-relación y el script de la base de datos ***northwind***, instale con la ayuda del arbol de objetos.
 
 Botón derecho sobre el objeto ***Bases de Datos*** le permite crear la base de datos ***northwind***.
 
@@ -179,7 +185,7 @@ El analisis requerira de consultas SQL y un agente de IA para explorar los datos
 
 ### DOCUMENTACIÓN DE LA API REST DE PYTHON
 
-En la dirección ***http://localhost:4557/docs*** se muestra la documentación de los servicios ***API REST*** programados, clic del raton sobre una ruta especifica despliega mayor información.
+En la dirección ***http://localhost:4557/docs*** se muestra la documentación de los servicios ***API REST*** programados. Clic del raton sobre una ruta especifica despliega mayor información.
 
 - Parametros requeridos por el servicio (nombre y tipo).
 - Botones para la ejecución del servicio, ***Try it out*** y posteriormente ***Execute***.
@@ -232,7 +238,7 @@ El ***Web Server*** simplemente calcula en cada caso el impuesto mensual y regre
 
 La capacidad de procesamiento del servidor depende de la cantidad de datos del archivo.
 
-Si lo que se desea es el procesamiento de grandes cantidades de información será necesario utilizar bibliotecas Python externas al framework ***Flask***.
+Si lo que se desea es el procesamiento de grandes cantidades de información será necesario utilizar bibliotecas de ***Python*** externas al framework ***Flask***.
 
 #### Python Celery
 
@@ -250,7 +256,7 @@ Cuando se entra por primera vez, aperece un formulario donde se solicita una dir
 
 En el ambiente de trabajo de ***N8N***, abajo a la izquierda, donde aparece el ***nombre del usuario*** está el menu de tres puntos ***...***, tome la opción ***Settings*** y posteriormente presione el botón ***Enter activation key***, digite la licencia que llego a su correo y acepte para completar el proceso de configuración.
 
-#### Sobre N8N
+#### Sobre ***N8N***
 
 Crear ***Workflows*** es muy sencillo, existen muchos video tutoriales en la red que puedes consultar.
 
@@ -258,7 +264,7 @@ Algunas de mis plantillas -***Workflows***- son muy sencillas, las de nodo unico
 
 Otros ***Workflow*** son mas elaboradas y representan soluciones a problemas reales.
 
-Lo que más me entusiasma de ***N8N*** no son los ***agentes de IA***, es su facilidad de integración con WhatsApp, Telegram, PostgreSql y la Suite de Google (Gmail, Drive, Hojas de cálculo, Documentos, Calendario, Contactos ...)
+Lo que más me entusiasma de ***N8N***, no son los ***agentes de IA***, es su facilidad de integración con WhatsApp, Telegram, PostgreSql y la Suite de Google (Gmail, Drive, Hojas de cálculo, Documentos, Calendario, Contactos ...)
 
 Mis soluciones se basan en scripts de Python y no soy hábil para desarrollar interfaces -***FrontEnd***-, entonces ***N8N*** me facilita esa tarea.
 
@@ -286,7 +292,7 @@ Las tareas más adecuadas para IA incluyen:
 - Descomposición de tareas complejas
 - Busqueda y sintesis de información
 
-Toma esto en cuenta durante el aprendizaje de esta magnifica herramienta.
+Toma esto en cuenta durante el aprendizaje de ***N8N***.
 
 ### INICIO Y CONFIGURACIÓN DE QDRANT
 
@@ -325,7 +331,7 @@ Funcionamiento:
 6. ***Generación de respuestas***, los fragmentos de texto seleccionados y la consulta original se introducen en un ***LLM*** que genera una respuesta coherente y contextualizada.
 7. ***Actualización constante***, para mantener la relevancia y presición, los datos externos se deben acualizar constantemente.
 
-Donde usar RAG:
+Donde usar ***RAG***:
 
 - ***Asistencia al cliente y chatbots***, las respuestas proporcionadas se realizan en base a manuales de usuario y base de datos de productos.
 - ***Analisis de riesgos financieros***, la información actualizada sobre tendencias del mercado e identificación de posibles riegos son la clave para una gestión finaciera efectiva.
@@ -339,19 +345,13 @@ Retos:
 
 ### DESCRIPCIÓN DE PLANTILLAS
 
-#### NOTA IMPORTANTE
-
-**La comunicación entre los contenedores/servidores se da a través de las direcciones IP asignadas en la RED VIRTUAL DE DOCKER**. 
-
-Cuando usamos el navegador para acceder a los servidores la dirección es ***localhost*** debido a que ***Docker*** establece un puente entre sus redes virtuales y la maquina huesped, el puerto es lo que hace la diferencia entre las aplicaciones.
-
-#### - consulta_sql_postgres.json
+### - consulta_sql_postgres.json
 
 Workflow de unico nodo del tipo ***Postgres execute SQL query***, ejecuta una consulta SQL a la base de datos Postrgres. 
 
 La configuración de la conexión debe considerar que la dirección IP del host de base de datos es ***10.13.0.2***
 
-#### - api_http_request.json
+### - api_http_request.json
 
 Workflow de unico nodo del tipo ***HTTP Request***, hace un llamado a la API de Python para recuperar información, la dirección del servicio de ejemplo es: ***http://10.13.0.5:4557/tablaispt*** 
 
@@ -359,7 +359,7 @@ Para conocer los servicios que brinda la API es necesario ver su documentación 
 
 Cada servicio/ruta muestra el código de llamado via ***CURL***, ese código puede emplearse para configurar nodos ***HTTP Request*** (boton ***Import cURL***), solo hay que cambiar la dirección ***localhost*** por la IP de la RED VIRTUAL DE DOCKER que se le asigno al servidor API.
 
-#### - dropdown_dinamico.json
+### - dropdown_dinamico.json
 
 El nodo ***Form*** de ***N8N*** permite definir con codigo ***JSON*** sus elementos, en este Workflow se usa esa modalidad.
 
@@ -378,7 +378,7 @@ El nodo ***Form*** de ***N8N*** permite definir con codigo ***JSON*** sus elemen
 
 Los valores del combo desplegable ***dropdown*** se definen con la variable ***$json.values[0]*** no son ***valores fijos***. Esto permite condicionar los valores del combo en nodos previos.
 
-#### - GeneraCaendarioNFL.json
+### - GeneraCaendarioNFL.json
 
 Este Workflow surge de la necesidad de tener en mi Calendario de Google todos los juegos de la temporada regular de la NFL. 
 
@@ -397,7 +397,7 @@ La solución consiste en:
 
 Una vez generado mi propio calendario de juegos, la intención es construir un Workflow que generare cada semana la lista de encuentros y la envie a mis contactos para que hagan sus pronósticos. Otro Workflow estaria a la espera de los pronósticos para almacenarlos y llevar el record.
 
-#### - carga_leyes.json 
+### - carga_leyes.json 
 
 Este Workflow es el ejemplo del uso de RAG, la descripción del flujo es:
 
@@ -416,13 +416,13 @@ Este Workflow es el ejemplo del uso de RAG, la descripción del flujo es:
 
 Posterior a la carga de la ley condominal se hace lo mismo con el reglamento de la ley, la información de ambos documentos queda en la misma base de datos pero en colecciones distintas. 
 
-#### - chat_condominios.json
+### - chat_condominios.json
 
 Este Workflow es un chatbot "especializado" que responde preguntas relacionadas con la ley de propiedad en condominio de mi ciudad y su reglamento.
 
 Usa la información almacenada con el Workflow ***carga-leyes.json***
 
-#### - borra_coleccion.JSON
+### - borra_coleccion.JSON
 
 Este Workflow de unico nodo sirve para borrar colecciones de la base de datos vectorial. Si por alguna razón la ley de propiedad en condominio cambia hay que borrar su contenido de la base de datos y volverlo a cargar (Punto 7 del funcionamiento de un sistema RAG).   
 No hay que olvidar que la referencia a la base de datos vectorial es:
@@ -482,7 +482,7 @@ networks:
     name: podman
 ```
 
-El servidor API REST queda en la dirección https://api.midominio.com/docs
+El servidor ***API REST*** queda en la dirección https://api.midominio.com/docs
 
 Es importante mencionar que la herramienta ***ACME Companion*** requiere de un dominio válido para emitir certificados. Esto se debe a que el protocolo ***ACME*** valida la propiedad del dominio antes de emitir un certificado. ***Sin un dominio registrado y accesible, el proceso de verificación no puede completarse***. Debes poseer un dominio y tener control sobre su configuración DNS o servidor web.
 

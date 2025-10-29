@@ -1,0 +1,113 @@
+services:
+
+     db:
+        image: postgres
+        network_mode: bridge
+        volumes:
+            - postgres-data:/var/lib/postgresql/data
+        environment:
+            - POSTGRES_PASSWORD=C0ntr4s3n4
+        ports:
+            - "0.0.0.0:5432:5432"
+        tty: true
+        networks: [default, proxy]
+
+     pgadmin:
+        image: dpage/pgadmin4
+        volumes:
+            - ./database:/respaldo 
+        environment:
+            - PGADMIN_DEFAULT_EMAIL=mimail@gmail.com
+            - PGADMIN_DEFAULT_PASSWORD=C0ntr4s3n4
+            - VIRTUAL_HOST=admindb.midominio.com
+            - LETSENCRYPT_HOST=admindb.midominio.com
+            - LETSENCRYPT_EMAIL=mimail@gmail.com
+        ports:
+            - "0.0.0.0:8015:80"
+        tty: true
+        networks: [default, proxy]
+
+     cache:
+        image: redis
+        container_name: redis
+        ports:
+            - "0.0.0.0:6379:6379"
+        tty: true
+        networks: [default, proxy]
+
+     qdrant:
+        image: qdrant/qdrant
+        container_name: qdrant
+        volumes:
+            - ./qdrant:/home/qdrant/storage
+        ports:
+            - "0.0.0.0:6333:6333"
+        restart: unless-stopped
+        tty: true
+        networks: [default, proxy]
+
+     api:
+        image: python3_fastapi1:latest
+        volumes:
+            - ./fastapi:/home
+        environment:
+            - VIRTUAL_HOST=api.midominio.com
+            - LETSENCRYPT_HOST=api.midominio.com
+            - LETSENCRYPT_EMAIL=mimail@gmail.com
+            - HOSTDB=10.88.0.4
+            - CACHE=10.88.0.26
+            - USERDB=postgres
+            - PASSDB=P0stgr3s
+            - PORTDB=5432
+            - DATABASE=postgres
+        ports:
+            - "0.0.0.0:4557:4557"
+        entrypoint: /bin/bash -c 'cd /home && uvicorn main:app --host 0.0.0.0 --port 4557 --reload --workers 1 '
+        tty: true
+        networks: [default, proxy]
+
+     web:
+        image: python3_flask1:latest
+        volumes:
+            - ./flask:/home
+        environment:
+            - VIRTUAL_HOST=web.midominio.com
+            - LETSENCRYPT_HOST=web.midominio.com
+            - LETSENCRYPT_EMAIL=mimail@gmail.com
+            - HOSTAPI=http://10.88.0.28:4557
+            - HOSTCACHE=10.88.0.26
+        ports:
+            - "0.0.0.0:5001:5001"
+        entrypoint: /bin/bash -c 'cd /home && gunicorn --bind 0.0.0.0:5001 -w 2 app:app --log-file - '
+        tty: true
+        networks: [default, proxy]
+
+     n8n:
+        image: n8nio/n8n
+        container_name: n8n
+        volumes:
+            - ./n8n_data:/home/node/.n8n
+        environment:
+            - N8N_HOST=n8n.midominio.com
+            - WEBHOOK_URL=https://n8n.midominio.com
+            - N8N_PORT=5678
+            - N8N_BASIC_AUTH_ACTIVE=true
+            - N8N_BASIC_AUTH_USER=admin8n
+            - N8N_BASIC_AUTH_PASSWORD=C0ntr4s3n4
+            - N8N_ENCRYPTION_KEY=QwIsgxQUuotLHolyx9qilvZnB8NIZ3cf
+            - VIRTUAL_HOST=n8n.midominio.com
+            - LETSENCRYPT_HOST=n8n.midominio.com
+            - LETSENCRYPT_EMAIL=mimail@gmail.com
+        ports:
+            - "0.0.0.0:5678:5678"
+        restart: unless-stopped
+        tty: true
+        networks: [default, proxy]
+
+volumes:
+  postgres-data:
+
+networks:
+  proxy:
+   external:
+    name: podman
