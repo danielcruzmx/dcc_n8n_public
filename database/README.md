@@ -1,3 +1,3 @@
-## MODELO E-R NORTWIND
+## MODELO E-R NORTHWIND
 
-![Modelo E-R Northwind](modelo_nortwind.png)
+![Modelo E-R Northwind](modelo_northwind.png)
