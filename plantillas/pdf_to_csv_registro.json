@@ -1,0 +1,764 @@
+{
+  "name": "pdf_to_csv_registro",
+  "nodes": [
+    {
+      "parameters": {
+        "formTitle": "Convertidor PDF a CSV",
+        "formDescription": "Convierte estado de cuenta bancario en PDF a archivo CSV",
+        "formFields": {
+          "values": [
+            {
+              "fieldLabel": "Archivo PDF",
+              "fieldType": "file",
+              "multipleFiles": false,
+              "acceptFileTypes": ".pdf",
+              "requiredField": true
+            },
+            {
+              "fieldLabel": "Correo para envio de respuesta",
+              "fieldType": "email",
+              "requiredField": true
+            }
+          ]
+        },
+        "options": {}
+      },
+      "type": "n8n-nodes-base.formTrigger",
+      "typeVersion": 2.2,
+      "position": [
+        -3568,
+        -1568
+      ],
+      "id": "8cdbc06f-1d01-45aa-a78c-012a93600385",
+      "name": "On form submission",
+      "webhookId": "b79d8451-389b-40a9-b7e0-20c4915bf28d"
+    },
+    {
+      "parameters": {
+        "conditions": {
+          "options": {
+            "caseSensitive": true,
+            "leftValue": "",
+            "typeValidation": "strict",
+            "version": 2
+          },
+          "conditions": [
+            {
+              "id": "08c8d0c4-4458-4d31-940e-e3e6914cabfc",
+              "leftValue": "={{ $('On form submission').item.binary }}",
+              "rightValue": "",
+              "operator": {
+                "type": "object",
+                "operation": "exists",
+                "singleValue": true
+              }
+            }
+          ],
+          "combinator": "or"
+        },
+        "options": {}
+      },
+      "type": "n8n-nodes-base.filter",
+      "typeVersion": 2.2,
+      "position": [
+        -3376,
+        -1568
+      ],
+      "id": "ad54ab62-f996-4f2d-b887-078b3f01674b",
+      "name": "IF contains binary"
+    },
+    {
+      "parameters": {
+        "inputDataFieldName": "Archivo_PDF",
+        "name": "={{ $json.Archivo.filename }}",
+        "driveId": {
+          "__rl": true,
+          "mode": "list",
+          "value": "My Drive"
+        },
+        "folderId": {
+          "__rl": true,
+          "value": "1rkdfkklbc1F2qSNPxszK6vtH4cHFzOwh",
+          "mode": "list",
+          "cachedResultName": "EDOS_CUENTA_N8N",
+          "cachedResultUrl": "https://drive.google.com/drive/folders/1rkdfkklbc1F2qSNPxszK6vtH4cHFzOwh"
+        },
+        "options": {}
+      },
+      "type": "n8n-nodes-base.googleDrive",
+      "typeVersion": 3,
+      "position": [
+        -3184,
+        -1568
+      ],
+      "id": "c39902d7-d6dc-446f-b5b3-ecd46f41a947",
+      "name": "Upload PDF",
+      "credentials": {
+        "googleDriveOAuth2Api": {
+          "id": "l7IkZQ2t7vXts2am",
+          "name": "Google Drive account"
+        }
+      }
+    },
+    {
+      "parameters": {
+        "operation": "download",
+        "fileId": {
+          "__rl": true,
+          "value": "={{ $json.id }}",
+          "mode": "id"
+        },
+        "options": {}
+      },
+      "type": "n8n-nodes-base.googleDrive",
+      "typeVersion": 3,
+      "position": [
+        -3376,
+        -1360
+      ],
+      "id": "14e97557-926b-43b7-a2d1-b7c433cdd6d4",
+      "name": "Download PDF",
+      "credentials": {
+        "googleDriveOAuth2Api": {
+          "id": "l7IkZQ2t7vXts2am",
+          "name": "Google Drive account"
+        }
+      }
+    },
+    {
+      "parameters": {
+        "operation": "pdf",
+        "options": {}
+      },
+      "type": "n8n-nodes-base.extractFromFile",
+      "typeVersion": 1,
+      "position": [
+        -3184,
+        -1360
+      ],
+      "id": "d8124727-0864-492d-8393-ef2683eea925",
+      "name": "Extract Text from PDF"
+    },
+    {
+      "parameters": {
+        "conditions": {
+          "options": {
+            "caseSensitive": true,
+            "leftValue": "",
+            "typeValidation": "strict",
+            "version": 2
+          },
+          "conditions": [
+            {
+              "id": "c23f9164-62d8-492b-98f7-ae852f397ed5",
+              "leftValue": "={{ $json.info.Producer }}",
+              "rightValue": "Xenos D2eVision",
+              "operator": {
+                "type": "string",
+                "operation": "notContains"
+              }
+            }
+          ],
+          "combinator": "and"
+        },
+        "options": {}
+      },
+      "type": "n8n-nodes-base.if",
+      "typeVersion": 2.2,
+      "position": [
+        -3568,
+        -1120
+      ],
+      "id": "5b6d57bf-2e9e-48f5-a387-b4d4301fba3e",
+      "name": "IF require OCR"
+    },
+    {
+      "parameters": {
+        "operation": "download",
+        "fileId": {
+          "__rl": true,
+          "value": "={{ $('Set ID File').item.json.id }}",
+          "mode": "id"
+        },
+        "options": {}
+      },
+      "type": "n8n-nodes-base.googleDrive",
+      "typeVersion": 3,
+      "position": [
+        -3392,
+        -1056
+      ],
+      "id": "85c17ab2-f200-4de4-9fa1-e4c19d6d1d22",
+      "name": "Download PDF convert",
+      "credentials": {
+        "googleDriveOAuth2Api": {
+          "id": "l7IkZQ2t7vXts2am",
+          "name": "Google Drive account"
+        }
+      }
+    },
+    {
+      "parameters": {
+        "options": {}
+      },
+      "type": "n8n-nodes-base.mistralAi",
+      "typeVersion": 1,
+      "position": [
+        -3200,
+        -992
+      ],
+      "id": "ecbba1d4-e11c-4d22-879f-710d17e1582c",
+      "name": "Extract Text from PDF via OCR",
+      "credentials": {
+        "mistralCloudApi": {
+          "id": "2UdQLLj9GeLJt2x4",
+          "name": "Mistral Cloud account"
+        }
+      }
+    },
+    {
+      "parameters": {
+        "assignments": {
+          "assignments": [
+            {
+              "id": "8a6e257d-4099-498f-a78c-a8f5b5d31771",
+              "name": "Text",
+              "value": "={{ $json.extractedText || $('Extract Text from PDF').item.json.text }}",
+              "type": "string"
+            }
+          ]
+        },
+        "options": {}
+      },
+      "type": "n8n-nodes-base.set",
+      "typeVersion": 3.4,
+      "position": [
+        -3008,
+        -1136
+      ],
+      "id": "ae192b94-ace0-4d35-a380-bb5c3402e241",
+      "name": "Set TEXT"
+    },
+    {
+      "parameters": {
+        "assignments": {
+          "assignments": [
+            {
+              "id": "093bb354-1ff9-4683-ac3b-7085100984f6",
+              "name": "id",
+              "value": "={{ $json.id }}",
+              "type": "string"
+            },
+            {
+              "id": "e072afe1-a36c-4dbc-b234-af50e18aea9e",
+              "name": "correo",
+              "value": "={{ $('On form submission').item.json['Correo para envio de respuesta'] }}",
+              "type": "string"
+            }
+          ]
+        },
+        "options": {}
+      },
+      "type": "n8n-nodes-base.set",
+      "typeVersion": 3.4,
+      "position": [
+        -3568,
+        -1360
+      ],
+      "id": "669ca77b-038e-4256-af2b-2f8fbdb28fc5",
+      "name": "Set ID File"
+    },
+    {
+      "parameters": {
+        "operation": "toText",
+        "sourceProperty": "Text",
+        "options": {}
+      },
+      "type": "n8n-nodes-base.convertToFile",
+      "typeVersion": 1.1,
+      "position": [
+        -2800,
+        -1248
+      ],
+      "id": "fcd6642c-aaf2-48b1-8f8e-b4e28a91ae5b",
+      "name": "Convert Text to File"
+    },
+    {
+      "parameters": {
+        "fieldsToSummarize": {
+          "values": [
+            {
+              "aggregation": "concatenate",
+              "field": "line"
+            }
+          ]
+        },
+        "options": {}
+      },
+      "type": "n8n-nodes-base.summarize",
+      "typeVersion": 1.1,
+      "position": [
+        -2592,
+        -1072
+      ],
+      "id": "ad23e7a6-87e6-48d6-a878-2993dd4fe0fa",
+      "name": "Concatenate lines periodo"
+    },
+    {
+      "parameters": {
+        "operation": "append",
+        "documentId": {
+          "__rl": true,
+          "value": "1msZN_uVGLdDHuZice_Z1-fRjf5da56uUmcrKS36OFTs",
+          "mode": "list",
+          "cachedResultName": "conversiones",
+          "cachedResultUrl": "https://docs.google.com/spreadsheets/d/1msZN_uVGLdDHuZice_Z1-fRjf5da56uUmcrKS36OFTs/edit?usp=drivesdk"
+        },
+        "sheetName": {
+          "__rl": true,
+          "value": "gid=0",
+          "mode": "list",
+          "cachedResultName": "Hoja 1",
+          "cachedResultUrl": "https://docs.google.com/spreadsheets/d/1msZN_uVGLdDHuZice_Z1-fRjf5da56uUmcrKS36OFTs/edit#gid=0"
+        },
+        "columns": {
+          "mappingMode": "defineBelow",
+          "value": {
+            "id": "={{ $('Set ID File').item.json.id }}",
+            "nombre": "={{ $('Upload PDF').item.json.name }}",
+            "creator": "={{ $('Extract Text from PDF').item.json.info.Creator }}",
+            "producer": "={{ $('Extract Text from PDF').item.json.info.Producer }}",
+            "periodo": "={{ $json.concatenated_line }}"
+          },
+          "matchingColumns": [
+            "id"
+          ],
+          "schema": [
+            {
+              "id": "id",
+              "displayName": "id",
+              "required": false,
+              "defaultMatch": true,
+              "display": true,
+              "type": "string",
+              "canBeUsedToMatch": true,
+              "removed": false
+            },
+            {
+              "id": "nombre",
+              "displayName": "nombre",
+              "required": false,
+              "defaultMatch": false,
+              "display": true,
+              "type": "string",
+              "canBeUsedToMatch": true
+            },
+            {
+              "id": "producer",
+              "displayName": "producer",
+              "required": false,
+              "defaultMatch": false,
+              "display": true,
+              "type": "string",
+              "canBeUsedToMatch": true
+            },
+            {
+              "id": "creator",
+              "displayName": "creator",
+              "required": false,
+              "defaultMatch": false,
+              "display": true,
+              "type": "string",
+              "canBeUsedToMatch": true
+            },
+            {
+              "id": "periodo",
+              "displayName": "periodo",
+              "required": false,
+              "defaultMatch": false,
+              "display": true,
+              "type": "string",
+              "canBeUsedToMatch": true
+            }
+          ],
+          "attemptToConvertTypes": false,
+          "convertFieldsToString": false
+        },
+        "options": {}
+      },
+      "type": "n8n-nodes-base.googleSheets",
+      "typeVersion": 4.6,
+      "position": [
+        -2384,
+        -1072
+      ],
+      "id": "56287903-8480-4e1c-895a-1c3ee5cccff5",
+      "name": "Append record with data Files",
+      "credentials": {
+        "googleSheetsOAuth2Api": {
+          "id": "ZLIDpEagr6el58s5",
+          "name": "Google Sheets account"
+        }
+      }
+    },
+    {
+      "parameters": {
+        "jsCode": "const terms = ['periodo del', 'período del', 'fecha de corte'];\nconst items = $input.all();\n\nreturn items.flatMap(item => {\n  const text = item.json?.Text || '';\n  const lines = text.split(/\\r\\n|\\n/);\n\n  return lines\n    .filter(line => terms.some(term => line.trim().toLowerCase().includes(term.toLowerCase())))\n    .map(matchingLine => ({ json: { line: matchingLine.trim() } }));\n});"
+      },
+      "type": "n8n-nodes-base.code",
+      "typeVersion": 2,
+      "position": [
+        -2800,
+        -1072
+      ],
+      "id": "e0595977-1bf4-4772-b34d-9687e02e7a04",
+      "name": "Code obtain lines periodo"
+    },
+    {
+      "parameters": {
+        "content": "# Automatización Estados de Cuenta en PDF a datos CSV\n\n## Esta automatización recibe un estado de cuenta bancario en PDF, recupera el texto para procesarlo/convertirlo en un archivo CSV.\n\n- Algunos archivos PDF no son legibles cuando se convierten a texto, para esos casos se utiliza un OCR.\n- El texto recuperado del PDF se pasa vía HTTP Request a un programa que le da formato tabular CSV.\n- Se lleva registro de los archivos procesados en una hoja de calculo. \n ",
+        "height": 304,
+        "width": 992
+      },
+      "type": "n8n-nodes-base.stickyNote",
+      "position": [
+        -2960,
+        -1600
+      ],
+      "typeVersion": 1,
+      "id": "0f30f2ee-92e0-45ba-ba3a-508d117c0fff",
+      "name": "Sticky Note"
+    },
+    {
+      "parameters": {
+        "method": "POST",
+        "url": "http://172.19.0.2:5001/uploadfile",
+        "sendBody": true,
+        "contentType": "multipart-form-data",
+        "bodyParameters": {
+          "parameters": [
+            {
+              "parameterType": "formBinaryData",
+              "name": "archivo_datos",
+              "inputDataFieldName": "data"
+            }
+          ]
+        },
+        "options": {
+          "response": {
+            "response": {
+              "responseFormat": "file"
+            }
+          }
+        }
+      },
+      "type": "n8n-nodes-base.httpRequest",
+      "typeVersion": 4.2,
+      "position": [
+        -2592,
+        -1248
+      ],
+      "id": "85bda1ed-c358-46a9-9d35-105d1e8141fc",
+      "name": "HTTP Request"
+    },
+    {
+      "parameters": {
+        "sendTo": "={{ $('Set ID File').item.json.correo}}",
+        "subject": "Hola, estado de cuenta CSV ",
+        "emailType": "text",
+        "message": "Buen dia, tu estado de cuenta PDF fue convertido a CSV ",
+        "options": {
+          "attachmentsUi": {
+            "attachmentsBinary": [
+              {}
+            ]
+          }
+        }
+      },
+      "type": "n8n-nodes-base.gmail",
+      "typeVersion": 2.1,
+      "position": [
+        -2032,
+        -1088
+      ],
+      "id": "2eee2bda-363e-4463-b8a1-b85241ac2743",
+      "name": "Send a message",
+      "webhookId": "b4a2f310-9e51-48ec-92a4-5236bad720cd",
+      "credentials": {
+        "gmailOAuth2": {
+          "id": "ZpWadTbXNUmQn0iW",
+          "name": "Gmail account"
+        }
+      }
+    },
+    {
+      "parameters": {
+        "name": "={{ $('Set ID File').item.json.id }}.csv",
+        "driveId": {
+          "__rl": true,
+          "mode": "list",
+          "value": "My Drive"
+        },
+        "folderId": {
+          "__rl": true,
+          "value": "1h1BMdSAuZGqJc_BCwwo8OVGnMgTWLvdy",
+          "mode": "list",
+          "cachedResultName": "ADCON_TEXT_FILES",
+          "cachedResultUrl": "https://drive.google.com/drive/folders/1h1BMdSAuZGqJc_BCwwo8OVGnMgTWLvdy"
+        },
+        "options": {}
+      },
+      "type": "n8n-nodes-base.googleDrive",
+      "typeVersion": 3,
+      "position": [
+        -2384,
+        -1248
+      ],
+      "id": "6dcf7a6f-950c-443c-aa54-44ba039ac997",
+      "name": "Upload File CSV",
+      "credentials": {
+        "googleDriveOAuth2Api": {
+          "id": "l7IkZQ2t7vXts2am",
+          "name": "Google Drive account"
+        }
+      }
+    },
+    {
+      "parameters": {
+        "operation": "download",
+        "fileId": {
+          "__rl": true,
+          "value": "={{ $json.id }}",
+          "mode": "id"
+        },
+        "options": {}
+      },
+      "type": "n8n-nodes-base.googleDrive",
+      "typeVersion": 3,
+      "position": [
+        -2224,
+        -1248
+      ],
+      "id": "88c8c3f7-7870-426c-8b58-fff414a8290f",
+      "name": "Download file",
+      "credentials": {
+        "googleDriveOAuth2Api": {
+          "id": "l7IkZQ2t7vXts2am",
+          "name": "Google Drive account"
+        }
+      }
+    }
+  ],
+  "pinData": {},
+  "connections": {
+    "On form submission": {
+      "main": [
+        [
+          {
+            "node": "IF contains binary",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "IF contains binary": {
+      "main": [
+        [
+          {
+            "node": "Upload PDF",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "Upload PDF": {
+      "main": [
+        [
+          {
+            "node": "Set ID File",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "Download PDF": {
+      "main": [
+        [
+          {
+            "node": "Extract Text from PDF",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "Extract Text from PDF": {
+      "main": [
+        [
+          {
+            "node": "IF require OCR",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "IF require OCR": {
+      "main": [
+        [
+          {
+            "node": "Set TEXT",
+            "type": "main",
+            "index": 0
+          }
+        ],
+        [
+          {
+            "node": "Download PDF convert",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "Download PDF convert": {
+      "main": [
+        [
+          {
+            "node": "Extract Text from PDF via OCR",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "Extract Text from PDF via OCR": {
+      "main": [
+        [
+          {
+            "node": "Set TEXT",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "Set TEXT": {
+      "main": [
+        [
+          {
+            "node": "Convert Text to File",
+            "type": "main",
+            "index": 0
+          },
+          {
+            "node": "Code obtain lines periodo",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "Set ID File": {
+      "main": [
+        [
+          {
+            "node": "Download PDF",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "Convert Text to File": {
+      "main": [
+        [
+          {
+            "node": "HTTP Request",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "Concatenate lines periodo": {
+      "main": [
+        [
+          {
+            "node": "Append record with data Files",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "Code obtain lines periodo": {
+      "main": [
+        [
+          {
+            "node": "Concatenate lines periodo",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "Append record with data Files": {
+      "main": [
+        []
+      ]
+    },
+    "HTTP Request": {
+      "main": [
+        [
+          {
+            "node": "Upload File CSV",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "Upload File CSV": {
+      "main": [
+        [
+          {
+            "node": "Download file",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "Download file": {
+      "main": [
+        [
+          {
+            "node": "Send a message",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "Send a message": {
+      "main": [
+        []
+      ]
+    }
+  },
+  "active": false,
+  "settings": {
+    "executionOrder": "v1"
+  },
+  "versionId": "ceb58ab0-2fc9-433c-acce-5a1219476815",
+  "meta": {
+    "templateCredsSetupCompleted": true,
+    "instanceId": "67b255571d3e77948fbbda85494c7a22923b13cf8843d38014de44d273cbcaf4"
+  },
+  "id": "AhVNOqx6n8aSmUDJ",
+  "tags": []
+}

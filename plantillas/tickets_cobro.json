@@ -1,0 +1,365 @@
+{
+  "name": "tickets_cobro",
+  "nodes": [
+    {
+      "parameters": {
+        "method": "POST",
+        "url": "https://apirest.adcondominio.com/eltoken",
+        "sendBody": true,
+        "bodyParameters": {
+          "parameters": [
+            {
+              "name": "username",
+              "value": "dhhhkh"
+            },
+            {
+              "name": "password",
+              "value": "9898898"
+            }
+          ]
+        },
+        "options": {}
+      },
+      "type": "n8n-nodes-base.httpRequest",
+      "typeVersion": 4.2,
+      "position": [
+        -1040,
+        -336
+      ],
+      "id": "e0bdbdaf-9b00-469b-bed8-b7a6cf588a5b",
+      "name": "HTTP Request Token"
+    },
+    {
+      "parameters": {
+        "url": "=https://apirest.adcondominio.com/deptos/{{ $('On form Condominio').item.json.Condominio }}",
+        "sendQuery": true,
+        "queryParameters": {
+          "parameters": [
+            {}
+          ]
+        },
+        "sendHeaders": true,
+        "headerParameters": {
+          "parameters": [
+            {
+              "name": "accept",
+              "value": "application/json"
+            },
+            {
+              "name": "Authorization",
+              "value": "=Bearer {{ $json.access_token }}"
+            }
+          ]
+        },
+        "options": {}
+      },
+      "type": "n8n-nodes-base.httpRequest",
+      "typeVersion": 4.2,
+      "position": [
+        -848,
+        -336
+      ],
+      "id": "0fd48207-6314-4dd1-aa31-598774afba5f",
+      "name": "HTTP Request Deptos"
+    },
+    {
+      "parameters": {
+        "formTitle": "Tickets",
+        "formFields": {
+          "values": [
+            {
+              "fieldLabel": "Condominio",
+              "fieldType": "dropdown",
+              "fieldOptions": {
+                "values": [
+                  {
+                    "option": "BALCONES"
+                  },
+                  {
+                    "option": "COYOACAN"
+                  },
+                  {
+                    "option": "SADI81NVO"
+                  },
+                  {
+                    "option": "ARAGON37"
+                  }
+                ]
+              },
+              "requiredField": true
+            }
+          ]
+        },
+        "options": {}
+      },
+      "type": "n8n-nodes-base.formTrigger",
+      "typeVersion": 2.2,
+      "position": [
+        -1216,
+        -336
+      ],
+      "id": "ffe011fc-948e-4e60-815f-06ffc2fbffa4",
+      "name": "On form Condominio",
+      "webhookId": "b4b1b420-d2bd-4fd5-a7c2-aa6c7fb77519"
+    },
+    {
+      "parameters": {
+        "assignments": {
+          "assignments": [
+            {
+              "id": "96049292-ef68-43ca-8ae9-2102c52b0ae1",
+              "name": "option",
+              "value": "={{ $json.id }} {{ $json.depto }} {{ $json.poseedor }}",
+              "type": "string"
+            }
+          ]
+        },
+        "options": {}
+      },
+      "type": "n8n-nodes-base.set",
+      "typeVersion": 3.4,
+      "position": [
+        -1216,
+        -96
+      ],
+      "id": "9e8f9325-d8a8-4bee-bd06-6f474b4d514f",
+      "name": "Edit Fields Options"
+    },
+    {
+      "parameters": {
+        "aggregate": "aggregateAllItemData",
+        "destinationFieldName": "values",
+        "options": {}
+      },
+      "type": "n8n-nodes-base.aggregate",
+      "typeVersion": 1,
+      "position": [
+        -1040,
+        -96
+      ],
+      "id": "4e187af9-bbe2-47ca-b62d-74e7cba27671",
+      "name": "Aggregate List Options"
+    },
+    {
+      "parameters": {
+        "assignments": {
+          "assignments": [
+            {
+              "id": "7641a010-4ebe-4d3a-9aea-4a7c6b750249",
+              "name": "values",
+              "value": "={{ $json.values }}",
+              "type": "string"
+            }
+          ]
+        },
+        "options": {}
+      },
+      "type": "n8n-nodes-base.set",
+      "typeVersion": 3.4,
+      "position": [
+        -848,
+        -96
+      ],
+      "id": "99fa9619-505a-49b1-a772-878e59ad4a3f",
+      "name": "Edit Fields Options a String"
+    },
+    {
+      "parameters": {
+        "defineForm": "json",
+        "jsonOutput": "=[\n   {\n    \"fieldLabel\": \"Departamentos\",\n    \"fieldType\": \"dropdown\",\n    \"fieldOptions\": {\n      \"values\": {{ $json.values }}\n    },\n    \"requiredField\": true\n  }\n] ",
+        "options": {}
+      },
+      "type": "n8n-nodes-base.form",
+      "typeVersion": 1,
+      "position": [
+        -592,
+        -336
+      ],
+      "id": "183a11a1-a3e8-4561-9e28-2e5a67a5ec82",
+      "name": "Form Options Deptos",
+      "webhookId": "95d17ee1-598e-4f6a-9ce3-1fe125bd7969"
+    },
+    {
+      "parameters": {
+        "assignments": {
+          "assignments": [
+            {
+              "id": "99268b81-0a57-41f3-b337-9655b5cf6f69",
+              "name": "ID",
+              "value": "={{ $json.Departamentos.split(\" \")[0] }}",
+              "type": "string"
+            }
+          ]
+        },
+        "options": {}
+      },
+      "type": "n8n-nodes-base.set",
+      "typeVersion": 3.4,
+      "position": [
+        -416,
+        -336
+      ],
+      "id": "4c04c217-a7d8-41f8-9bb7-a4d0cfac8adf",
+      "name": "Edit Fields ID"
+    },
+    {
+      "parameters": {
+        "url": "=https://apirest.adcondominio.com/ficha/{{ $('On form Condominio').item.json.Condominio }}/{{ $json.ID }}",
+        "sendQuery": true,
+        "queryParameters": {
+          "parameters": [
+            {}
+          ]
+        },
+        "sendHeaders": true,
+        "headerParameters": {
+          "parameters": [
+            {
+              "name": "accept",
+              "value": "application/json"
+            },
+            {
+              "name": "Authorization",
+              "value": "=Bearer {{ $('HTTP Request Token').item.json.access_token }}"
+            }
+          ]
+        },
+        "options": {}
+      },
+      "type": "n8n-nodes-base.httpRequest",
+      "typeVersion": 4.2,
+      "position": [
+        -240,
+        -336
+      ],
+      "id": "d4784f05-c527-4919-b638-2c9eb5690f7e",
+      "name": "HTTP Request Datos Ficha"
+    },
+    {
+      "parameters": {
+        "options": {}
+      },
+      "type": "n8n-nodes-base.set",
+      "typeVersion": 3.4,
+      "position": [
+        -592,
+        -112
+      ],
+      "id": "9752a587-52a1-4941-b4dc-a740ce5e42f7",
+      "name": "Edit Fields"
+    }
+  ],
+  "pinData": {},
+  "connections": {
+    "HTTP Request Token": {
+      "main": [
+        [
+          {
+            "node": "HTTP Request Deptos",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "HTTP Request Deptos": {
+      "main": [
+        [
+          {
+            "node": "Edit Fields Options",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "On form Condominio": {
+      "main": [
+        [
+          {
+            "node": "HTTP Request Token",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "Edit Fields Options": {
+      "main": [
+        [
+          {
+            "node": "Aggregate List Options",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "Aggregate List Options": {
+      "main": [
+        [
+          {
+            "node": "Edit Fields Options a String",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "Edit Fields Options a String": {
+      "main": [
+        [
+          {
+            "node": "Form Options Deptos",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "Form Options Deptos": {
+      "main": [
+        [
+          {
+            "node": "Edit Fields ID",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "Edit Fields ID": {
+      "main": [
+        [
+          {
+            "node": "HTTP Request Datos Ficha",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "HTTP Request Datos Ficha": {
+      "main": [
+        [
+          {
+            "node": "Edit Fields",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    }
+  },
+  "active": false,
+  "settings": {
+    "executionOrder": "v1"
+  },
+  "versionId": "a279f28b-76a0-493f-a70c-af11850296c7",
+  "meta": {
+    "templateCredsSetupCompleted": true,
+    "instanceId": "67b255571d3e77948fbbda85494c7a22923b13cf8843d38014de44d273cbcaf4"
+  },
+  "id": "fseVSqEuRS5rkRNG",
+  "tags": []
+}

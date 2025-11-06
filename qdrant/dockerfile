@@ -1,6 +1,6 @@
-# Uso -> docker build -t python3_fastapi1 -f dockerfile .
+# Uso -> docker build -t python311_flask -f dockerfile .
 
-FROM python:3.9-slim
+FROM python:3.11-slim
 COPY . /home
 WORKDIR /home
 RUN pip install --no-cache-dir -r requirements.txt

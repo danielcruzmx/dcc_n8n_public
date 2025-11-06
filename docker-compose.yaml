@@ -102,6 +102,21 @@ services:
             ipv4_address: 10.13.0.8
         restart: unless-stopped
 
+    test_dbv:
+        image: python311_flask:latest
+        volumes:
+            - ./qdrant:/home
+        environment:
+            - HOSTAPI=http://10.13.0.5:4557
+            - HOSTCACHE=10.13.0.4
+        ports:
+            - "0.0.0.0:5010:5010"
+        working_dir: /home  
+        tty: true
+        networks:
+          vpn8n:
+            ipv4_address: 10.13.0.9
+
 volumes:
   postgres-vol:
 

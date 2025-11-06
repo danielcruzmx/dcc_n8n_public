@@ -1,0 +1,68 @@
+{
+  "name": "test_qdrant_filter",
+  "nodes": [
+    {
+      "parameters": {},
+      "type": "n8n-nodes-base.manualTrigger",
+      "typeVersion": 1,
+      "position": [
+        -432,
+        0
+      ],
+      "id": "a84f05e4-5bb7-4b84-9312-83bcd19db2fd",
+      "name": "When clicking ‘Execute workflow’"
+    },
+    {
+      "parameters": {
+        "method": "POST",
+        "url": "http://10.13.0.6:6333/collections/peliculas/points/scroll",
+        "sendHeaders": true,
+        "headerParameters": {
+          "parameters": [
+            {
+              "name": "api-key",
+              "value": "p4r4ng4r1cut1r1m1cu4r0"
+            }
+          ]
+        },
+        "sendBody": true,
+        "specifyBody": "json",
+        "jsonBody": "{\n  \"with_payload\": [\n    \"actores\"\n  ],\n  \"filter\": {\n    \"must\": [\n      {\n        \"key\": \"actores\",\n        \"match\": {\n          \"value\": \"Tom Hanks\"\n        }\n      }\n    ]\n  },\n  \"limit\": 2,\n  \"with_payload\": true,\n  \"with_vector\": false\n}",
+        "options": {}
+      },
+      "type": "n8n-nodes-base.httpRequest",
+      "typeVersion": 4.2,
+      "position": [
+        -176,
+        0
+      ],
+      "id": "c303260a-3634-400b-8f3c-88e4910e0e4a",
+      "name": "HTTP Request"
+    }
+  ],
+  "pinData": {},
+  "connections": {
+    "When clicking ‘Execute workflow’": {
+      "main": [
+        [
+          {
+            "node": "HTTP Request",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    }
+  },
+  "active": false,
+  "settings": {
+    "executionOrder": "v1"
+  },
+  "versionId": "27401dc3-4965-491e-9eb6-ad7406f39509",
+  "meta": {
+    "templateCredsSetupCompleted": true,
+    "instanceId": "66037d4eb617fb26a2fd45902042e170cf5a5f2ddf737127b2240a034f738436"
+  },
+  "id": "DVzVsBJ6DedceBqN",
+  "tags": []
+}

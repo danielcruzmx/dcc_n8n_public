@@ -8,7 +8,6 @@
 *.zip
 *.journal
 
-
 n8n_data/binaryData/
 n8n_data/git/
 n8n_data/nodes/

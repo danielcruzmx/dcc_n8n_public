@@ -66,8 +66,8 @@ Las imagenes para los servidores ***FastApi*** y ***Flask*** se construyen con l
 Es necesario entrar al directorio correspondiente y ejecutar en cada directorio la instrucción:
 
 ```
-docker build -t python3_flask2 -f dockerfile
-docker build -t python3_fastapi1 -f dockerfile
+docker build -t python3_flask2 -f dockerfile .
+docker build -t python3_fastapi1 -f dockerfile .
 ```
 
 ### ARRANQUE Y ADMINISTRACIÓN DE CONTENEDORES

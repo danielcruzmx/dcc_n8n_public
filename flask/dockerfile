@@ -1,4 +1,4 @@
-# Uso -> docker build -t python3_flask2 -f dockerfile
+# Uso -> docker build -t python3_flask2 -f dockerfile .
 
 FROM python:3.9-slim
 COPY . /home
